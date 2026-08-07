@@ -27,6 +27,7 @@ Diseñar, implementar y publicar en `bastianibanez.com` un portafolio bilingüe 
 - [Generar cuatro direcciones visuales en Stitch](tickets/02-generar-direcciones-stitch.md) — Se eligió Dossier de sistemas: rail lateral, registros editoriales técnicos, jerarquía tipográfica fuerte y acento turquesa funcional; el marco violeta de Stitch no forma parte del diseño.
 - [Refinar el Dossier de sistemas seleccionado](tickets/03-elegir-direccion.md) — Se consolidó la portada en español con cuatro proyectos factuales, evidencia vinculada, rutas de CV y adaptación móvil; es la referencia definitiva para implementación.
 - [Preparar el contenido bilingüe y los artefactos de proyecto](tickets/04-preparar-contenido.md) — Copy ES/EN, CV web, metadatos y cuatro diagramas saneados quedaron listos; se corrigieron los estados privados de GroupFit/go-agent y la evidencia de pruebas de manufactura.
+- [Regenerar los CV PDF bilingües de una página](tickets/08-regenerar-cv.md) — Los CV ES/EN quedaron generados en A4 con el contenido aprobado, enlaces activos, texto seleccionable, metadatos de idioma y composición Dossier de sistemas.
 
 ## Not yet specified
 

@@ -23,9 +23,10 @@ this pack whenever the two disagree.
 - The manufacturing-platform test claim is **255 unit tests in 57 files**,
   verified with Vitest on 2026-08-07. Keep the date close to the claim or omit
   the number if the suite changes.
-- The current downloadable CV files found outside this repository use an older
-  email address and are not approved for `/cv.pdf`. Generate a new one-page PDF
-  from the CV source below before enabling the download link.
+- The approved one-page CV files are `../output/pdf/cv.pdf` for `/cv.pdf` and
+  `../output/pdf/en/cv.pdf` for `/en/cv.pdf`. The Astro implementation must copy
+  these exact artifacts to its public routes; older CV files outside this
+  repository are not approved.
 - `mailto:ibanezmbastian@gmail.com` is the sole primary conversion action.
 
 ## Approved public links
