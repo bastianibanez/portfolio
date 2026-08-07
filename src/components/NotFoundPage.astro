@@ -1,0 +1,33 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { content, type Locale } from "../data/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = content[locale];
+const canonicalPath = locale === "es" ? "/404" : "/en/404";
+const alternatePath = locale === "es" ? "/en/404" : "/404";
+---
+
+<BaseLayout
+  locale={locale}
+  canonicalPath={canonicalPath}
+  alternatePath={alternatePath}
+  title={`404 — ${page.notFound.heading}`}
+  description={page.notFound.description}
+>
+  <section class="not-found">
+    <p class="eyebrow">{page.notFound.eyebrow}</p>
+    <h1>{page.notFound.heading}</h1>
+    <p>{page.notFound.description}</p>
+    <div class="hero__actions">
+      <a class="action-link action-link--primary" href={page.routes.home}>{page.notFound.action} →</a>
+      <a class="action-link" href={content[page.alternateLocale].routes.home}>
+        {page.alternateLanguageLabel} →
+      </a>
+    </div>
+  </section>
+</BaseLayout>

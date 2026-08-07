@@ -1,0 +1,110 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "./SectionHeading.astro";
+import {
+  alternateProjectPath,
+  content,
+  projectPath,
+  type Locale,
+  type Project,
+} from "../data/content";
+
+interface Props {
+  locale: Locale;
+  project: Project;
+}
+
+const { locale, project } = Astro.props;
+const page = content[locale];
+const index = page.projects.findIndex((candidate) => candidate.key === project.key);
+const previous = index > 0 ? page.projects[index - 1] : undefined;
+const next = index < page.projects.length - 1 ? page.projects[index + 1] : undefined;
+const canonicalPath = projectPath(locale, project);
+const alternatePath = alternateProjectPath(locale, project);
+const projectsId = locale === "es" ? "proyectos" : "projects";
+---
+
+<BaseLayout
+  locale={locale}
+  canonicalPath={canonicalPath}
+  alternatePath={alternatePath}
+  title={`${project.title} — Bastián Ibáñez`}
+  description={project.summary}
+>
+  <article>
+    <header class="case-hero">
+      <nav class="breadcrumbs" aria-label={locale === "es" ? "Migas de pan" : "Breadcrumbs"}>
+        <a href={`${page.routes.home}#${projectsId}`}>{page.projectLabels.back}</a>
+        <span aria-hidden="true"> / SYS-{project.index}</span>
+      </nav>
+      <p class="eyebrow">SYS-{project.index} / {project.label}</p>
+      <h1>{project.title}</h1>
+      <p class="case-hero__summary">{project.summary}</p>
+    </header>
+
+    <figure class="project-figure">
+      <img src={project.asset} alt="" width="1200" height="560" />
+      <figcaption>{project.caption}</figcaption>
+    </figure>
+
+    <div class="case-summary">
+      <div class="case-copy">
+        <section class="case-block">
+          <h2>{page.projectLabels.contribution}</h2>
+          <p>{project.contribution}</p>
+        </section>
+        <section class="case-block">
+          <h2>{page.projectLabels.evidence}</h2>
+          <p>{project.evidence}</p>
+        </section>
+      </div>
+      <aside class="case-block" aria-label={page.projectLabels.stack}>
+        <h2>{page.projectLabels.stack}</h2>
+        <ul class="stack-list">
+          {project.stack.map((technology) => <li>{technology}</li>)}
+        </ul>
+      </aside>
+    </div>
+
+    <section class="section" aria-labelledby="decisions-heading">
+      <div id="decisions-heading">
+        <SectionHeading index="A" title={page.projectLabels.decisions} />
+      </div>
+      <div class="decision-list">
+        {project.decisions.map((decision) => (
+          <article class="decision">
+            <h3>{decision.title}</h3>
+            <p>{decision.why}</p>
+          </article>
+        ))}
+      </div>
+    </section>
+
+    <div class="contact-panel">
+      <p>{page.contact.prompt}</p>
+      <div class="contact-actions">
+        <a class="action-link action-link--primary" href="mailto:ibanezmbastian@gmail.com">
+          {page.contact.emailLabel} ↗
+        </a>
+        <a class="action-link" href={page.routes.cv}>{page.contact.cvLabel} →</a>
+      </div>
+    </div>
+
+    {(previous || next) && (
+      <nav class="case-pagination" aria-label={locale === "es" ? "Casos relacionados" : "Related cases"}>
+        {previous ? (
+          <a href={projectPath(locale, previous)}>
+            <span>{page.projectLabels.previous}</span>
+            <strong>← {previous.title}</strong>
+          </a>
+        ) : <span aria-hidden="true"></span>}
+        {next ? (
+          <a href={projectPath(locale, next)}>
+            <span>{page.projectLabels.next}</span>
+            <strong>{next.title} →</strong>
+          </a>
+        ) : <span aria-hidden="true"></span>}
+      </nav>
+    )}
+  </article>
+</BaseLayout>

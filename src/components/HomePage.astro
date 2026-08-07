@@ -1,0 +1,145 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import SectionHeading from "./SectionHeading.astro";
+import { content, identity, projectPath, type Locale } from "../data/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = content[locale];
+const alternatePath = content[page.alternateLocale].routes.home;
+const ids = locale === "es"
+  ? {
+      projects: "proyectos",
+      evidence: "evidencia",
+      profile: "perfil",
+      additional: "trabajo-adicional",
+      contact: "contacto",
+    }
+  : {
+      projects: "projects",
+      evidence: "evidence",
+      profile: "profile",
+      additional: "additional-work",
+      contact: "contact",
+    };
+---
+
+<BaseLayout
+  locale={locale}
+  canonicalPath={page.routes.home}
+  alternatePath={alternatePath}
+  title={page.title}
+  description={page.description}
+>
+  <section class="hero" aria-labelledby="hero-heading">
+    <p class="eyebrow">{identity.name} / {identity.location}</p>
+    <h1 id="hero-heading">{page.hero.heading}</h1>
+    <div class="hero__copy">
+      <p>{page.hero.proposition}</p>
+      <p>{page.hero.context}</p>
+    </div>
+    <div class="hero__actions">
+      <a class="action-link action-link--primary" href={identity.emailHref}>{page.hero.emailLabel} ↗</a>
+      <a class="action-link" href={`#${ids.projects}`}>{page.hero.projectsLabel} ↓</a>
+      <a class="action-link" href={page.routes.cv}>{page.hero.cvLabel} →</a>
+      <a class="action-link" href={page.routes.pdf} download>{page.hero.pdfLabel} ↓</a>
+    </div>
+  </section>
+
+  <section class="section" id={ids.projects} aria-labelledby="projects-heading">
+    <div id="projects-heading">
+      <SectionHeading index="01" title={page.sections.projects} />
+    </div>
+    <div class="project-list">
+      {page.projects.map((project) => (
+        <article class="project-entry">
+          <div class="project-entry__meta">
+            <span class="project-entry__index">SYS-{project.index}</span>
+            <p>{project.label}</p>
+            <p>{project.stack.slice(0, 4).join(", ")}</p>
+          </div>
+          <div>
+            <h3><a href={projectPath(locale, project)}>{project.title}</a></h3>
+            <p class="project-entry__summary">{project.summary}</p>
+            <p class="project-entry__evidence">{project.evidence}</p>
+            <a class="project-entry__link" href={projectPath(locale, project)}>
+              {page.projectLabels.caseLink} →
+            </a>
+          </div>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id={ids.evidence} aria-labelledby="evidence-heading">
+    <div id="evidence-heading">
+      <SectionHeading index="02" title={page.sections.evidence} />
+    </div>
+    <div class="evidence-table">
+      {page.evidenceRows.map((row) => (
+        <article class="evidence-row">
+          <h3>{row.decision}</h3>
+          <p>{row.why}</p>
+          <p class="meta">{row.evidence}</p>
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id={ids.profile} aria-labelledby="profile-heading">
+    <div id="profile-heading">
+      <SectionHeading index="03" title={page.sections.profile} />
+    </div>
+    <div class="profile-grid">
+      <div class="profile-copy">
+        {page.profile.paragraphs.map((paragraph) => <p>{paragraph}</p>)}
+      </div>
+      <div class="capabilities">
+        <h3>{page.profile.capabilitiesHeading}</h3>
+        <ul>
+          {page.profile.capabilities.map((capability) => <li>{capability}</li>)}
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="section" id={ids.additional} aria-labelledby="additional-heading">
+    <div id="additional-heading">
+      <SectionHeading index="04" title={page.sections.additional} />
+    </div>
+    <div class="additional-grid">
+      {page.additional.map((item) => (
+        <article class="additional-item">
+          <h3>{item.title}</h3>
+          <p>{item.description}</p>
+          {item.links && (
+            <div class="link-row">
+              {item.links.map((link) => (
+                <a class="action-link" href={link.href}>{link.label} ↗</a>
+              ))}
+            </div>
+          )}
+        </article>
+      ))}
+    </div>
+  </section>
+
+  <section class="section" id={ids.contact} aria-labelledby="contact-heading">
+    <div id="contact-heading">
+      <SectionHeading index="05" title={page.sections.contact} />
+    </div>
+    <div class="contact-panel">
+      <p>{page.contact.prompt}</p>
+      <div class="contact-actions">
+        <a class="action-link action-link--primary" href={identity.emailHref}>
+          {page.contact.emailLabel} ↗
+        </a>
+        <a class="action-link" href={page.routes.cv}>{page.contact.cvLabel} →</a>
+        <a class="action-link" href={page.routes.pdf} download>{page.contact.pdfLabel} ↓</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

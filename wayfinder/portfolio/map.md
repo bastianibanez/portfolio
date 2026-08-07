@@ -28,6 +28,7 @@ Diseñar, implementar y publicar en `bastianibanez.com` un portafolio bilingüe 
 - [Refinar el Dossier de sistemas seleccionado](tickets/03-elegir-direccion.md) — Se consolidó la portada en español con cuatro proyectos factuales, evidencia vinculada, rutas de CV y adaptación móvil; es la referencia definitiva para implementación.
 - [Preparar el contenido bilingüe y los artefactos de proyecto](tickets/04-preparar-contenido.md) — Copy ES/EN, CV web, metadatos y cuatro diagramas saneados quedaron listos; se corrigieron los estados privados de GroupFit/go-agent y la evidencia de pruebas de manufactura.
 - [Regenerar los CV PDF bilingües de una página](tickets/08-regenerar-cv.md) — Los CV ES/EN quedaron generados en A4 con el contenido aprobado, enlaces activos, texto seleccionable, metadatos de idioma y composición Dossier de sistemas.
+- [Implementar el portafolio en Astro](tickets/05-implementar-astro.md) — El sitio estático bilingüe quedó construido con inicio, CV y cuatro casos por idioma, contenido tipado, cero JavaScript cliente y configuración de Workers Static Assets.
 
 ## Not yet specified
 

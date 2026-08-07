@@ -1,0 +1,51 @@
+---
+import { content, identity, type Locale } from "../data/content";
+
+interface Props {
+  locale: Locale;
+  currentPath: string;
+}
+
+const { locale, currentPath } = Astro.props;
+const page = content[locale];
+const isHome = currentPath === page.routes.home;
+const anchor = (id: string) => `${page.routes.home}#${id}`;
+const ids = locale === "es"
+  ? { projects: "proyectos", evidence: "evidencia", profile: "perfil", contact: "contacto" }
+  : { projects: "projects", evidence: "evidence", profile: "profile", contact: "contact" };
+const alternateHome = content[page.alternateLocale].routes.home;
+---
+
+<aside class="rail" aria-label={locale === "es" ? "Navegación principal" : "Primary navigation"}>
+  <a class="rail__name" href={page.routes.home}>{identity.name}</a>
+  <p class="rail__role">{identity.role}</p>
+  <p class="rail__location">{identity.location}</p>
+  <a class="rail__email" href={identity.emailHref}>{identity.email}</a>
+
+  <nav class="rail__nav">
+    <ul>
+      <li>
+        <a href={anchor(ids.projects)} aria-current={isHome ? "page" : undefined}>{page.nav.projects}</a>
+      </li>
+      <li><a href={anchor(ids.evidence)}>{page.nav.evidence}</a></li>
+      <li><a href={anchor(ids.profile)}>{page.nav.profile}</a></li>
+      <li>
+        <a href={page.routes.cv} aria-current={currentPath === page.routes.cv ? "page" : undefined}>
+          {page.nav.cv}
+        </a>
+      </li>
+      <li><a href={anchor(ids.contact)}>{page.nav.contact}</a></li>
+    </ul>
+    <a class="rail__download" href={page.routes.pdf} download>{page.hero.pdfLabel}</a>
+  </nav>
+
+  <div class="rail__footer">
+    <ul>
+      <li><a href={identity.github} rel="me">GitHub</a></li>
+      <li><a href={identity.linkedin} rel="me">LinkedIn</a></li>
+      <li class="rail__language">
+        <strong>{page.languageLabel}</strong> / <a href={alternateHome}>{page.alternateLanguageLabel}</a>
+      </li>
+    </ul>
+  </div>
+</aside>

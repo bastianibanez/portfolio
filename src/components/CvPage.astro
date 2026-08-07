@@ -1,0 +1,95 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import { content, identity, type Locale } from "../data/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const page = content[locale];
+const cv = page.cv;
+const alternatePath = content[page.alternateLocale].routes.cv;
+const description = locale === "es"
+  ? "CV de Bastián Ibáñez Martínez: experiencia, proyectos, educación, tecnologías e idiomas."
+  : "Bastián Ibáñez Martínez's resume: experience, projects, education, technologies, and languages.";
+---
+
+<BaseLayout
+  locale={locale}
+  canonicalPath={page.routes.cv}
+  alternatePath={alternatePath}
+  title={`${cv.heading} — CV`}
+  description={description}
+>
+  <article>
+    <header class="cv-header">
+      <div>
+        <p class="eyebrow">CV / {identity.location}</p>
+        <h1>{cv.heading}</h1>
+        <p>{identity.role}</p>
+        <a href={identity.emailHref}>{identity.email}</a>
+      </div>
+      <a class="action-link action-link--primary" href={page.routes.pdf} download>{cv.downloadLabel} ↓</a>
+    </header>
+
+    <div class="cv-grid">
+      <div>
+        <section class="cv-section">
+          <h2>{cv.profileHeading}</h2>
+          <p>{cv.profile}</p>
+        </section>
+
+        <section class="cv-section">
+          <h2>{cv.experienceHeading}</h2>
+          {cv.experience.map((job) => (
+            <article class="job">
+              <div class="job__header">
+                <h3>{job.role} / {job.company}</h3>
+                <span class="date">{job.dates}</span>
+              </div>
+              <ul>
+                {job.bullets.map((bullet) => <li>{bullet}</li>)}
+              </ul>
+            </article>
+          ))}
+        </section>
+
+        <section class="cv-section">
+          <h2>{cv.projectsHeading}</h2>
+          <ul class="cv-projects">
+            {cv.projects.map((project) => (
+              <li><strong>{project.title}:</strong> {project.description}</li>
+            ))}
+          </ul>
+        </section>
+      </div>
+
+      <aside>
+        <section class="cv-section">
+          <h2>{cv.educationHeading}</h2>
+          <p><strong>{cv.degree}</strong><br />{cv.school}<br /><span class="date">{cv.educationDates}</span></p>
+        </section>
+        <section class="cv-section">
+          <h2>{cv.technologiesHeading}</h2>
+          <p>{cv.technologies}</p>
+        </section>
+        <section class="cv-section">
+          <h2>{cv.languagesHeading}</h2>
+          <ul>
+            {cv.languages.map((language) => (
+              <li><strong>{language.language}</strong> — {language.level}</li>
+            ))}
+          </ul>
+        </section>
+        <section class="cv-section">
+          <h2>{locale === "es" ? "Enlaces" : "Links"}</h2>
+          <div class="link-row">
+            <a class="action-link" href={identity.github}>GitHub ↗</a>
+            <a class="action-link" href={identity.linkedin}>LinkedIn ↗</a>
+          </div>
+        </section>
+      </aside>
+    </div>
+  </article>
+</BaseLayout>
