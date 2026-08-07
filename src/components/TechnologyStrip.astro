@@ -1,0 +1,65 @@
+---
+import {
+  siCloudflareworkers,
+  siDocker,
+  siFastapi,
+  siGo,
+  siGooglebigquery,
+  siGooglecloud,
+  siLanggraph,
+  siNextdotjs,
+  siPostgresql,
+  siPython,
+  siReact,
+  siTypescript,
+} from "simple-icons";
+import type { Locale } from "../data/content";
+
+interface Props {
+  locale: Locale;
+}
+
+const { locale } = Astro.props;
+const heading = locale === "es" ? "Tecnologías principales" : "Core technologies";
+
+const technologies = [
+  { label: "TypeScript", accessibleLabel: "TypeScript", icon: siTypescript },
+  { label: "React", accessibleLabel: "React", icon: siReact },
+  { label: "Next.js", accessibleLabel: "Next.js", icon: siNextdotjs },
+  { label: "Python", accessibleLabel: "Python", icon: siPython },
+  { label: "FastAPI", accessibleLabel: "FastAPI", icon: siFastapi },
+  { label: "Go", accessibleLabel: "Go", icon: siGo },
+  { label: "LangGraph", accessibleLabel: "LangGraph", icon: siLanggraph },
+  { label: "PostgreSQL", accessibleLabel: "PostgreSQL", icon: siPostgresql },
+  { label: "BigQuery", accessibleLabel: "Google BigQuery", icon: siGooglebigquery },
+  { label: "Docker", accessibleLabel: "Docker", icon: siDocker },
+  { label: "Google Cloud", accessibleLabel: "Google Cloud", icon: siGooglecloud },
+  { label: "Cloudflare", accessibleLabel: "Cloudflare Workers", icon: siCloudflareworkers },
+] as const;
+---
+
+<div class="technology-strip">
+  <p class="technology-strip__heading" id="technology-strip-heading">{heading}</p>
+  <div
+    class="technology-strip__viewport"
+    role="region"
+    tabindex="0"
+    aria-labelledby="technology-strip-heading"
+  >
+    <ul class="technology-strip__track">
+      {technologies.map((technology) => (
+        <li class="technology-strip__item" title={technology.accessibleLabel}>
+          <svg
+            class="technology-strip__icon"
+            viewBox="0 0 24 24"
+            aria-hidden="true"
+            focusable="false"
+          >
+            <path d={technology.icon.path}></path>
+          </svg>
+          <span>{technology.label}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+</div>
