@@ -126,19 +126,32 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          output_file="$(mktemp)"
-          if npx --yes "wrangler@${WRANGLER_VERSION}" delete "$PREVIEW_WORKER" \
-            --config wrangler.preview.jsonc \
-            --force 2>&1 | tee "$output_file"; then
-            exit 0
-          fi
+          response_file="$(mktemp)"
+          api_url="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts/${PREVIEW_WORKER}?force=true"
+          http_status="$(curl --silent --show-error \
+            --output "$response_file" \
+            --write-out '%{http_code}' \
+            --request DELETE \
+            --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            --connect-timeout 10 \
+            --max-time 30 \
+            --retry 2 \
+            --retry-all-errors \
+            "$api_url")"
 
-          if grep -qiE 'not found|does not exist|no worker' "$output_file"; then
-            echo "Preview Worker was already absent."
-            exit 0
-          fi
-
-          exit 1
+          case "$http_status" in
+            200|204)
+              echo "Deleted preview Worker $PREVIEW_WORKER."
+              ;;
+            404)
+              echo "Preview Worker was already absent."
+              ;;
+            *)
+              echo "Cloudflare returned HTTP $http_status while deleting $PREVIEW_WORKER." >&2
+              cat "$response_file" >&2
+              exit 1
+              ;;
+          esac
 
       - name: Delete consumed build artifacts
         shell: bash
@@ -179,30 +192,37 @@ jobs:
       - name: Check out cleanup config
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
 
-      - name: Restore npm cache
-        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: npm
-
       - name: Delete preview Worker
         if: github.event.pull_request.head.repo.full_name == github.repository
         shell: bash
         run: |
           set -euo pipefail
-          output_file="$(mktemp)"
-          if npx --yes "wrangler@${WRANGLER_VERSION}" delete "$PREVIEW_WORKER" \
-            --config wrangler.preview.jsonc \
-            --force 2>&1 | tee "$output_file"; then
-            exit 0
-          fi
+          response_file="$(mktemp)"
+          api_url="https://api.cloudflare.com/client/v4/accounts/${CLOUDFLARE_ACCOUNT_ID}/workers/scripts/${PREVIEW_WORKER}?force=true"
+          http_status="$(curl --silent --show-error \
+            --output "$response_file" \
+            --write-out '%{http_code}' \
+            --request DELETE \
+            --header "Authorization: Bearer ${CLOUDFLARE_API_TOKEN}" \
+            --connect-timeout 10 \
+            --max-time 30 \
+            --retry 2 \
+            --retry-all-errors \
+            "$api_url")"
 
-          if grep -qiE 'not found|does not exist|no worker' "$output_file"; then
-            echo "Preview Worker was already absent."
-            exit 0
-          fi
-
-          exit 1
+          case "$http_status" in
+            200|204)
+              echo "Deleted preview Worker $PREVIEW_WORKER."
+              ;;
+            404)
+              echo "Preview Worker was already absent."
+              ;;
+            *)
+              echo "Cloudflare returned HTTP $http_status while deleting $PREVIEW_WORKER." >&2
+              cat "$response_file" >&2
+              exit 1
+              ;;
+          esac
 
       - name: Delete retained build artifacts
         if: always()
