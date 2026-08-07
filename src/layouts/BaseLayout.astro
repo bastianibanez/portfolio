@@ -36,6 +36,7 @@ const homeIds = locale === "es"
     <meta name="description" content={description} />
     <meta name="theme-color" content="#090D0C" />
     <meta name="color-scheme" content="dark" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="canonical" href={canonical} />
     <link rel="alternate" hreflang="es" href={locale === "es" ? canonical : alternate} />
     <link rel="alternate" hreflang="en" href={locale === "en" ? canonical : alternate} />
@@ -75,7 +76,7 @@ const homeIds = locale === "es"
     </header>
 
     <div class="site-shell">
-      <SideRail locale={locale} currentPath={canonicalPath} />
+      <SideRail locale={locale} currentPath={canonicalPath} alternatePath={alternatePath} />
       <main class="main" id="main-content">
         <div class="main__inner">
           <slot />

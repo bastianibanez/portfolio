@@ -4,16 +4,16 @@ import { content, identity, type Locale } from "../data/content";
 interface Props {
   locale: Locale;
   currentPath: string;
+  alternatePath: string;
 }
 
-const { locale, currentPath } = Astro.props;
+const { locale, currentPath, alternatePath } = Astro.props;
 const page = content[locale];
 const isHome = currentPath === page.routes.home;
 const anchor = (id: string) => `${page.routes.home}#${id}`;
 const ids = locale === "es"
   ? { projects: "proyectos", evidence: "evidencia", profile: "perfil", contact: "contacto" }
   : { projects: "projects", evidence: "evidence", profile: "profile", contact: "contact" };
-const alternateHome = content[page.alternateLocale].routes.home;
 ---
 
 <aside class="rail" aria-label={locale === "es" ? "Navegación principal" : "Primary navigation"}>
@@ -44,7 +44,7 @@ const alternateHome = content[page.alternateLocale].routes.home;
       <li><a href={identity.github} rel="me">GitHub</a></li>
       <li><a href={identity.linkedin} rel="me">LinkedIn</a></li>
       <li class="rail__language">
-        <strong>{page.languageLabel}</strong> / <a href={alternateHome}>{page.alternateLanguageLabel}</a>
+        <strong>{page.languageLabel}</strong> / <a href={alternatePath}>{page.alternateLanguageLabel}</a>
       </li>
     </ul>
   </div>

@@ -29,6 +29,7 @@ Diseñar, implementar y publicar en `bastianibanez.com` un portafolio bilingüe 
 - [Preparar el contenido bilingüe y los artefactos de proyecto](tickets/04-preparar-contenido.md) — Copy ES/EN, CV web, metadatos y cuatro diagramas saneados quedaron listos; se corrigieron los estados privados de GroupFit/go-agent y la evidencia de pruebas de manufactura.
 - [Regenerar los CV PDF bilingües de una página](tickets/08-regenerar-cv.md) — Los CV ES/EN quedaron generados en A4 con el contenido aprobado, enlaces activos, texto seleccionable, metadatos de idioma y composición Dossier de sistemas.
 - [Implementar el portafolio en Astro](tickets/05-implementar-astro.md) — El sitio estático bilingüe quedó construido con inicio, CV y cuatro casos por idioma, contenido tipado, cero JavaScript cliente y configuración de Workers Static Assets.
+- [Verificar accesibilidad, rendimiento, SEO y privacidad](tickets/06-verificar-calidad.md) — Las 14 páginas pasan WCAG automatizado, teclado, responsive, SEO bilingüe, privacidad y cabeceras; Lighthouse móvil obtuvo 99–100 en rendimiento y 100 en las otras categorías, con LCP ≤ 1,7 s, CLS ≤ 0,001 y TBT 0 ms.
 
 ## Not yet specified
 
