@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>B. Ibáñez — Portfolio Flagship</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    "colors": {
+                        "on-tertiary-fixed": "#00201c",
+                        "on-surface": "#e5e2e1",
+                        "inverse-surface": "#e5e2e1",
+                        "tertiary-container": "#62fae3",
+                        "surface-variant": "#353534",
+                        "secondary-container": "#3f4946",
+                        "background": "#131313",
+                        "on-primary-fixed": "#171d1c",
+                        "surface-container-low": "#1c1b1b",
+                        "on-error": "#690005",
+                        "tertiary-fixed-dim": "#3cddc7",
+                        "tertiary-fixed": "#62fae3",
+                        "inverse-on-surface": "#313030",
+                        "error": "#ffb4ab",
+                        "surface-dim": "#131313",
+                        "on-primary": "#2b3231",
+                        "on-primary-fixed-variant": "#424847",
+                        "on-primary-container": "#5f6664",
+                        "on-background": "#e5e2e1",
+                        "outline": "#8d9290",
+                        "on-surface-variant": "#c3c7c6",
+                        "surface-container-lowest": "#0e0e0e",
+                        "surface-container-highest": "#353534",
+                        "on-secondary-fixed": "#141d1c",
+                        "on-tertiary-container": "#007165",
+                        "on-secondary-container": "#adb7b4",
+                        "surface-bright": "#393939",
+                        "outline-variant": "#434847",
+                        "primary-fixed": "#dee4e2",
+                        "secondary-fixed": "#dbe5e1",
+                        "on-secondary": "#293230",
+                        "primary-container": "#dee4e2",
+                        "surface-container": "#20201f",
+                        "surface-container-high": "#2a2a2a",
+                        "secondary-fixed-dim": "#bfc9c5",
+                        "on-error-container": "#ffdad6",
+                        "surface": "#131313",
+                        "inverse-primary": "#59605e",
+                        "tertiary": "#ffffff",
+                        "surface-raised": "#111816",
+                        "on-tertiary-fixed-variant": "#005047",
+                        "border-structural": "#26302D",
+                        "on-secondary-fixed-variant": "#3f4946",
+                        "secondary": "#bfc9c5",
+                        "ink-quiet": "#73807C",
+                        "on-tertiary": "#003731",
+                        "primary-fixed-dim": "#c2c8c6",
+                        "error-container": "#93000a",
+                        "surface-tint": "#c2c8c6",
+                        "primary": "#ffffff",
+                        "canvas": "#090D0C"
+                    },
+                    "borderRadius": {
+                        "DEFAULT": "0.125rem",
+                        "lg": "0.25rem",
+                        "xl": "0.5rem",
+                        "full": "0.75rem"
+                    },
+                    "spacing": {
+                        "sub-unit": "4px",
+                        "section-gap-mobile": "64px",
+                        "section-gap-desktop": "128px",
+                        "base-unit": "8px",
+                        "container-max": "1200px",
+                        "grid-gutter": "24px"
+                    },
+                    "fontFamily": {
+                        "metadata": ["IBM Plex Mono", "monospace"],
+                        "body": ["IBM Plex Sans", "sans-serif"],
+                        "project-heading": ["IBM Plex Sans", "sans-serif"],
+                        "display": ["IBM Plex Sans", "sans-serif"],
+                        "section-heading": ["IBM Plex Sans", "sans-serif"]
+                    },
+                    "fontSize": {
+                        "metadata": ["0.875rem", { "lineHeight": "1.5", "fontWeight": "400" }],
+                        "body": ["1.125rem", { "lineHeight": "1.55", "fontWeight": "400" }],
+                        "project-heading": ["1.5rem", { "lineHeight": "1.3", "fontWeight": "500" }],
+                        "display": ["clamp(2.75rem, 6vw, 4.5rem)", { "lineHeight": "1.1", "fontWeight": "600" }],
+                        "section-heading": ["clamp(2rem, 4vw, 3rem)", { "lineHeight": "1.2", "fontWeight": "500" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body { background-color: theme('colors.canvas'); color: theme('colors.on-surface'); }
+    </style>
+</head>
+<body class="font-body antialiased min-h-screen flex flex-col">
+<!-- TopNavBar (Derived from JSON) -->
+<header class="bg-background dark:bg-background docked full-width top-0 border-b border-structural flat no shadows font-metadata text-metadata sticky z-50">
+<div class="flex flex-col w-full max-w-container-max mx-auto">
+<!-- Row 1: Identity & Meta -->
+<div class="flex justify-between items-start md:items-center px-grid-gutter py-4 border-b border-structural flex-col md:flex-row gap-4 md:gap-0">
+<div class="flex flex-col">
+<h1 class="font-project-heading text-project-heading font-medium text-primary dark:text-primary mb-1">Bastián Ibáñez</h1>
+<span class="text-on-surface-variant">Software Engineer · Full-Stack &amp; Applied AI</span>
+</div>
+<div class="flex flex-wrap gap-6 items-center text-on-surface-variant">
+<span>Santiago</span>
+<a class="hover:text-primary transition-colors duration-200" href="mailto:bastian@example.com">bastian@example.com</a>
+<div class="flex items-center gap-2">
+<span class="text-tertiary-fixed-dim">ES</span>
+<span class="text-structural">/</span>
+<span class="hover:text-primary cursor-pointer transition-colors duration-200">EN</span>
+</div>
+</div>
+</div>
+<!-- Row 2: Navigation -->
+<nav class="flex px-grid-gutter overflow-x-auto whitespace-nowrap hide-scrollbar">
+<ul class="flex gap-8">
+<!-- Assuming "Archive" corresponds to "Proyectos" -->
+<li><a class="block py-4 text-tertiary-fixed-dim border-b-2 border-tertiary-fixed-dim text-on-primary-container opacity-80" href="#proyectos">Proyectos</a></li>
+<li><a class="block py-4 text-on-surface-variant hover:text-primary transition-colors duration-200" href="#experiencia">Experiencia</a></li>
+<li><a class="block py-4 text-on-surface-variant hover:text-primary transition-colors duration-200" href="#cv">CV</a></li>
+<li><a class="block py-4 text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">GitHub</a></li>
+<li><a class="block py-4 text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">LinkedIn</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main class="flex-grow w-full max-w-container-max mx-auto px-grid-gutter pb-section-gap-desktop">
+<!-- Introduction Section -->
+<section class="mt-section-gap-mobile md:mt-section-gap-desktop max-w-3xl">
+<p class="font-body text-body text-on-surface mb-8">
+                Ingeniero de software especializado en arquitecturas de backend robustas y la integración pragmática de inteligencia artificial aplicada. Mi enfoque se centra en construir sistemas duraderos que resuelvan problemas operativos complejos, priorizando la mantenibilidad, el rendimiento y la entrega de valor tangible sobre la complejidad innecesaria.
+            </p>
+<div class="flex flex-col sm:flex-row gap-8 items-start sm:items-center">
+<a class="inline-flex items-center justify-center rounded bg-transparent border border-tertiary-fixed text-tertiary-fixed px-6 py-3 font-metadata text-metadata font-medium hover:bg-tertiary-fixed/10 transition-colors focus:ring-2 focus:ring-tertiary-fixed focus:ring-offset-2 focus:ring-offset-canvas" href="mailto:bastian@example.com">
+                    Enviar email
+                </a>
+<div class="flex flex-wrap gap-4 font-metadata text-metadata text-on-surface-variant text-sm border border-structural px-4 py-2">
+<span class="flex items-center gap-1.5 before:content-[''] before:block before:w-2 before:h-2 before:bg-tertiary-fixed before:rounded-sm">Producción</span>
+<span class="flex items-center gap-1.5 before:content-[''] before:block before:w-2 before:h-2 before:bg-primary-fixed before:rounded-sm">Client delivery</span>
+<span class="flex items-center gap-1.5 before:content-[''] before:block before:w-2 before:h-2 before:bg-on-surface-variant before:rounded-sm">Public product</span>
+<span class="flex items-center gap-1.5 before:content-[''] before:block before:w-2 before:h-2 before:bg-secondary before:rounded-sm">Open source</span>
+</div>
+</div>
+</section>
+<!-- Project Archive -->
+<section class="mt-section-gap-desktop" id="proyectos">
+<div class="border-b border-structural pb-4 mb-8">
+<h2 class="font-section-heading text-section-heading text-primary">Project Archive</h2>
+</div>
+<div class="flex flex-col gap-0 border-t border-structural">
+<!-- Entry 1 (Featured) -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 border-b border-structural hover:bg-surface-container-lowest/50 transition-colors">
+<div class="col-span-1 md:col-span-3 flex flex-col font-metadata text-metadata text-on-surface-variant gap-1">
+<span class="text-tertiary-fixed">01 — Featured</span>
+<span>Industrial IoT</span>
+<span>Backend Lead</span>
+</div>
+<div class="col-span-1 md:col-span-6 flex flex-col">
+<h3 class="font-project-heading text-project-heading text-primary mb-2 flex items-center gap-3">
+                            Manufacturing Platform
+                            <span class="inline-block w-2 h-2 bg-tertiary-fixed rounded-sm" title="Producción"></span>
+</h3>
+<p class="font-body text-body text-on-surface-variant mb-4">Real-time floor monitoring system.</p>
+<div class="font-metadata text-metadata text-ink-quiet flex gap-4">
+<span>Go</span> <span>React</span> <span>PostgreSQL</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-3 flex md:justify-end items-start font-metadata text-metadata text-on-surface-variant">
+<span>Evidence: 312 tests</span>
+</div>
+</article>
+<!-- Entry 2 (Featured) -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 border-b border-structural hover:bg-surface-container-lowest/50 transition-colors">
+<div class="col-span-1 md:col-span-3 flex flex-col font-metadata text-metadata text-on-surface-variant gap-1">
+<span class="text-tertiary-fixed">02 — Featured</span>
+<span>SaaS Fitness</span>
+<span>Full-stack</span>
+</div>
+<div class="col-span-1 md:col-span-6 flex flex-col">
+<h3 class="font-project-heading text-project-heading text-primary mb-2 flex items-center gap-3">
+                            GroupFit
+                            <span class="inline-block w-2 h-2 bg-on-surface-variant rounded-sm" title="Public product"></span>
+</h3>
+<p class="font-body text-body text-on-surface-variant mb-4">Multi-tenant gym management.</p>
+<div class="font-metadata text-metadata text-ink-quiet flex gap-4">
+<span>TypeScript</span> <span>Next.js</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-3 flex md:justify-end items-start font-metadata text-metadata text-on-surface-variant">
+<span>Evidence: 1.2k users</span>
+</div>
+</article>
+<!-- Entry 3 (Secondary) -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 border-b border-structural hover:bg-surface-container-lowest/50 transition-colors opacity-80">
+<div class="col-span-1 md:col-span-3 flex flex-col font-metadata text-metadata text-on-surface-variant gap-1">
+<span>03 — Secondary</span>
+<span>Open Source</span>
+<span>Creator</span>
+</div>
+<div class="col-span-1 md:col-span-6 flex flex-col">
+<h3 class="font-project-heading text-project-heading text-primary mb-2 flex items-center gap-3">
+                            go-agent
+                            <span class="inline-block w-2 h-2 bg-secondary rounded-sm" title="Open source"></span>
+</h3>
+<div class="font-metadata text-metadata text-ink-quiet flex gap-4 mt-2">
+<span>Go</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-3 flex md:justify-end items-start font-metadata text-metadata text-on-surface-variant">
+<span>Evidence: 45 stars</span>
+</div>
+</article>
+<!-- Entry 4 (Secondary) -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-6 py-8 border-b border-structural hover:bg-surface-container-lowest/50 transition-colors opacity-80">
+<div class="col-span-1 md:col-span-3 flex flex-col font-metadata text-metadata text-on-surface-variant gap-1">
+<span>04 — Secondary</span>
+<span>Professional Work</span>
+<span>AI Architect</span>
+</div>
+<div class="col-span-1 md:col-span-6 flex flex-col">
+<h3 class="font-project-heading text-project-heading text-primary mb-2 flex items-center gap-3">
+                            ERP Operaciones
+                            <span class="inline-block w-2 h-2 bg-primary-fixed rounded-sm" title="Trabajo profesional · Caso anonimizado"></span>
+</h3>
+<div class="font-metadata text-metadata text-ink-quiet flex gap-4 mt-2">
+<span>Python</span> <span>LLMs</span>
+</div>
+</div>
+<div class="col-span-1 md:col-span-3 flex md:justify-end items-start font-metadata text-metadata text-on-surface-variant">
+<span>Evidence: Deployed</span>
+</div>
+</article>
+</div>
+</section>
+<!-- Flagship Focus (ERP Agent) -->
+<section class="mt-section-gap-desktop">
+<div class="border border-structural bg-surface-container-lowest p-6 md:p-10">
+<div class="border-b border-structural pb-6 mb-10">
+<span class="font-metadata text-metadata text-tertiary-fixed block mb-2">Caso de Estudio Principal</span>
+<h2 class="font-section-heading text-section-heading text-primary">Agente de operaciones ERP con IA</h2>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-10">
+<div class="lg:col-span-5 flex flex-col gap-8">
+<div>
+<h4 class="font-metadata text-metadata text-on-surface-variant uppercase tracking-wider mb-3 border-b border-structural pb-2 inline-block">Contexto</h4>
+<p class="font-body text-body text-on-surface">Manual ERP overhead limitaba la escalabilidad operativa. Las tareas repetitivas de ingreso y validación de datos consumían horas de ingeniería y gestión.</p>
+</div>
+<div>
+<h4 class="font-metadata text-metadata text-on-surface-variant uppercase tracking-wider mb-3 border-b border-structural pb-2 inline-block">Decisiones</h4>
+<ul class="font-body text-body text-on-surface list-disc list-inside space-y-2">
+<li>Implementación de Durable workflows para resiliencia stateful.</li>
+<li>Arquitectura Human-in-the-loop para supervisión crítica.</li>
+<li>Desacoplamiento de agentes LLM del sistema transaccional.</li>
+</ul>
+</div>
+<div>
+<h4 class="font-metadata text-metadata text-tertiary-fixed uppercase tracking-wider mb-3 border-b border-structural pb-2 inline-block">Resultado</h4>
+<p class="font-display text-display text-primary">65%</p>
+<p class="font-metadata text-metadata text-on-surface-variant">reducción en tiempo de resolución de tickets de operaciones.</p>
+</div>
+</div>
+<div class="lg:col-span-7">
+<div class="border border-structural bg-canvas aspect-video flex items-center justify-center p-4">
+<img alt="Technical architecture diagram for AI ERP Operations Agent" class="w-full h-full object-contain" src="https://lh3.googleusercontent.com/aida/AP1WRLvlYmLvg70GHFj8zMYWiKSRk5xWkjRZVnz0jaAUL-8ZtvH9H0tC_b79Z09SrGC3oeE0sGIbOB1lHvOPlogQfcg-TuJr2xbP59Bwqwz4zo73Ovc4ZXIMmQ9yNOXQo1guTqgMGVFRTAtVdY5sm4h8zad2YwTDUl2IlM02Nw65V3hKjnUEH-P5KX65UNCfk39e8TAZsVqGafpWSfvl274wMTHH5q53v-TJonwNgfvNqMGMS42WG74IrIGXylFd"/>
+</div>
+<p class="font-metadata text-metadata text-ink-quiet mt-3 text-right">Fig 1: Arquitectura de integración Agente-ERP.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Ledger & CV Record -->
+<section class="mt-section-gap-desktop grid grid-cols-1 lg:grid-cols-2 gap-16" id="experiencia">
+<!-- Experience Ledger -->
+<div>
+<div class="border-b border-structural pb-4 mb-8">
+<h2 class="font-project-heading text-project-heading text-primary">Experience Ledger</h2>
+</div>
+<div class="flex flex-col gap-6 relative before:content-[''] before:absolute before:left-[7px] before:top-2 before:bottom-2 before:w-[1px] before:bg-structural pl-6">
+<div class="relative">
+<div class="absolute w-4 h-4 bg-canvas border-2 border-tertiary-fixed rounded-sm -left-[30px] top-1"></div>
+<div class="font-metadata text-metadata text-tertiary-fixed mb-1">2022 — Present</div>
+<h3 class="font-project-heading text-project-heading text-primary text-lg">Senior Software Engineer</h3>
+<div class="font-metadata text-metadata text-on-surface-variant mt-1">NotoriosTI</div>
+</div>
+<div class="relative">
+<div class="absolute w-4 h-4 bg-canvas border border-structural rounded-sm -left-[30px] top-1"></div>
+<div class="font-metadata text-metadata text-on-surface-variant mb-1">2019 — 2022</div>
+<h3 class="font-project-heading text-project-heading text-primary text-lg">Full-Stack Engineer</h3>
+<div class="font-metadata text-metadata text-on-surface-variant mt-1">Client Delivery Agency</div>
+</div>
+<div class="relative">
+<div class="absolute w-4 h-4 bg-canvas border border-structural rounded-sm -left-[30px] top-1"></div>
+<div class="font-metadata text-metadata text-on-surface-variant mb-1">2018 — Present</div>
+<h3 class="font-project-heading text-project-heading text-primary text-lg">Independent Contributor</h3>
+<div class="font-metadata text-metadata text-on-surface-variant mt-1">Freelance / Open Source</div>
+</div>
+</div>
+</div>
+<!-- CV Record -->
+<div id="cv">
+<div class="border-b border-structural pb-4 mb-8">
+<h2 class="font-project-heading text-project-heading text-primary">CV Record</h2>
+</div>
+<div class="grid grid-cols-1 sm:grid-cols-2 gap-8 mb-10">
+<div>
+<h4 class="font-metadata text-metadata text-on-surface-variant uppercase tracking-wider mb-3 border-b border-structural pb-2">Education</h4>
+<p class="font-body text-body text-on-surface">Computer Science</p>
+</div>
+<div>
+<h4 class="font-metadata text-metadata text-on-surface-variant uppercase tracking-wider mb-3 border-b border-structural pb-2">Languages</h4>
+<p class="font-body text-body text-on-surface">English / Spanish</p>
+</div>
+<div class="sm:col-span-2">
+<h4 class="font-metadata text-metadata text-on-surface-variant uppercase tracking-wider mb-3 border-b border-structural pb-2">Capabilities</h4>
+<div class="font-metadata text-metadata text-primary flex gap-4 flex-wrap">
+<span class="bg-surface-container-high px-2 py-1 border border-structural">Go</span>
+<span class="bg-surface-container-high px-2 py-1 border border-structural">TypeScript</span>
+<span class="bg-surface-container-high px-2 py-1 border border-structural">Applied AI</span>
+</div>
+</div>
+</div>
+<div class="flex flex-col sm:flex-row gap-4 font-metadata text-metadata">
+<a class="inline-flex items-center justify-center border border-structural hover:border-tertiary-fixed text-primary px-6 py-3 transition-colors" href="#">
+                        Ver CV completo
+                    </a>
+<a class="inline-flex items-center justify-center border border-structural hover:border-tertiary-fixed text-primary px-6 py-3 transition-colors gap-2" href="#">
+<span class="material-symbols-outlined text-[18px]">download</span>
+                        Descargar CV PDF
+                    </a>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (Derived from JSON) -->
+<footer class="bg-background dark:bg-background full-width bottom-0 border-t border-structural flat no shadows font-metadata text-metadata text-on-surface-variant dark:text-on-surface-variant mt-auto">
+<div class="w-full px-grid-gutter py-base-unit flex flex-col md:flex-row justify-between items-center max-w-container-max mx-auto gap-4 md:gap-0 min-h-[64px]">
+<div class="font-metadata text-metadata uppercase tracking-widest text-primary">
+                © 2024 Bastián Ibáñez. Dossier v4.1.0
+            </div>
+<div class="flex gap-6 items-center flex-wrap justify-center">
+<span>Santiago</span>
+<a class="hover:text-primary transition-colors focus:ring-2 focus:ring-tertiary-fixed focus:ring-offset-2" href="mailto:bastian@example.com">Email</a>
+<a class="hover:text-primary transition-colors focus:ring-2 focus:ring-tertiary-fixed focus:ring-offset-2" href="#">GitHub</a>
+<a class="hover:text-primary transition-colors focus:ring-2 focus:ring-tertiary-fixed focus:ring-offset-2" href="#">LinkedIn</a>
+<a class="hover:text-primary transition-colors focus:ring-2 focus:ring-tertiary-fixed focus:ring-offset-2" href="#">Source Code</a>
+<a class="hover:text-primary transition-colors focus:ring-2 focus:ring-tertiary-fixed focus:ring-offset-2" href="#">GPG Key</a>
+</div>
+</div>
+</footer>
+</body></html>

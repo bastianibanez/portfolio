@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bastián Ibáñez | Dossier de sistemas</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@400;500;600&amp;family=IBM+Plex+Mono:wght@400;500&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "on-error-container": "#ffdad6",
+                    "surface-raised": "#111816",
+                    "error": "#ffb4ab",
+                    "primary-fixed": "#dee4e2",
+                    "surface-container-lowest": "#0e0e0e",
+                    "border-structural": "#26302D",
+                    "on-tertiary-container": "#007165",
+                    "surface-tint": "#c2c8c6",
+                    "secondary-container": "#3f4946",
+                    "on-error": "#690005",
+                    "on-background": "#e5e2e1",
+                    "inverse-surface": "#e5e2e1",
+                    "primary-container": "#dee4e2",
+                    "on-tertiary-fixed": "#00201c",
+                    "primary-fixed-dim": "#c2c8c6",
+                    "tertiary-fixed": "#62fae3",
+                    "surface-container": "#20201f",
+                    "inverse-primary": "#59605e",
+                    "surface-container-low": "#1c1b1b",
+                    "on-primary-fixed-variant": "#424847",
+                    "secondary-fixed": "#dbe5e1",
+                    "tertiary-container": "#62fae3",
+                    "primary": "#ffffff",
+                    "on-tertiary": "#003731",
+                    "on-secondary": "#293230",
+                    "on-surface-variant": "#c3c7c6",
+                    "on-secondary-container": "#adb7b4",
+                    "on-secondary-fixed-variant": "#3f4946",
+                    "surface-bright": "#393939",
+                    "on-primary-container": "#5f6664",
+                    "on-primary-fixed": "#171d1c",
+                    "error-container": "#93000a",
+                    "secondary-fixed-dim": "#bfc9c5",
+                    "ink-quiet": "#73807C",
+                    "surface-container-highest": "#353534",
+                    "on-secondary-fixed": "#141d1c",
+                    "background": "#131313",
+                    "on-primary": "#2b3231",
+                    "tertiary-fixed-dim": "#3cddc7",
+                    "secondary": "#bfc9c5",
+                    "surface": "#131313",
+                    "on-tertiary-fixed-variant": "#005047",
+                    "on-surface": "#e5e2e1",
+                    "outline-variant": "#434847",
+                    "surface-container-high": "#2a2a2a",
+                    "canvas": "#090D0C",
+                    "tertiary": "#ffffff",
+                    "surface-variant": "#353534",
+                    "outline": "#8d9290",
+                    "surface-dim": "#131313",
+                    "inverse-on-surface": "#313030"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.125rem",
+                    "lg": "0.25rem",
+                    "xl": "0.5rem",
+                    "full": "0.75rem"
+            },
+            "spacing": {
+                    "grid-gutter": "24px",
+                    "sub-unit": "4px",
+                    "section-gap-desktop": "128px",
+                    "section-gap-mobile": "64px",
+                    "base-unit": "8px",
+                    "container-max": "1200px"
+            },
+            "fontFamily": {
+                    "project-heading": [
+                            "IBM Plex Sans", "sans-serif"
+                    ],
+                    "body": [
+                            "IBM Plex Sans", "sans-serif"
+                    ],
+                    "metadata": [
+                            "IBM Plex Mono", "monospace"
+                    ],
+                    "display": [
+                            "IBM Plex Sans", "sans-serif"
+                    ],
+                    "section-heading": [
+                            "IBM Plex Sans", "sans-serif"
+                    ]
+            },
+            "fontSize": {
+                    "project-heading": [
+                            "1.5rem",
+                            {
+                                    "lineHeight": "1.3",
+                                    "fontWeight": "500"
+                            }
+                    ],
+                    "body": [
+                            "1.125rem",
+                            {
+                                    "lineHeight": "1.55",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "metadata": [
+                            "0.875rem",
+                            {
+                                    "lineHeight": "1.5",
+                                    "fontWeight": "400"
+                            }
+                    ],
+                    "display": [
+                            "clamp(2.75rem, 6vw, 4.5rem)",
+                            {
+                                    "lineHeight": "1.1",
+                                    "fontWeight": "600"
+                            }
+                    ],
+                    "section-heading": [
+                            "clamp(2rem, 4vw, 3rem)",
+                            {
+                                    "lineHeight": "1.2",
+                                    "fontWeight": "500"
+                            }
+                    ]
+            }
+          }
+        }
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+          font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        
+        /* Custom Accent overriding for specific highlights requested by prompt */
+        .text-accent { color: #2DD4BF; }
+        .border-accent { border-color: #2DD4BF; }
+        .hover\:text-accent:hover { color: #2DD4BF; }
+        .focus-visible\:ring-accent:focus-visible { 
+            outline: none;
+            box-shadow: 0 0 0 3px #090D0C, 0 0 0 5px #2DD4BF; 
+        }
+        
+        /* Ensure selection matches theme */
+        ::selection {
+            background-color: #2DD4BF;
+            color: #090D0C;
+        }
+    </style>
+</head>
+<body class="bg-canvas text-on-surface font-body antialiased selection:bg-tertiary-fixed selection:text-canvas">
+<!-- Top Navigation (Mobile) -->
+<header class="md:hidden flex justify-between items-center h-16 px-grid-gutter w-full bg-canvas border-b border-structural sticky top-0 z-50 font-metadata text-metadata">
+<div class="flex items-center gap-4 text-on-surface">
+<span>Bastián Ibáñez</span>
+</div>
+<div class="flex gap-4">
+<a class="text-primary hover:text-accent" href="#proyectos">Proyectos</a>
+<a class="text-primary hover:text-accent" download href="/cv.pdf">CV</a>
+<span class="text-primary">ES</span> / <a class="hover:text-primary transition-colors" href="/en/">EN</a>
+</div>
+</header>
+<div class="flex min-h-screen max-w-container-max mx-auto relative">
+<!-- SideNav (Desktop) -->
+<nav class="hidden md:flex flex-col h-screen w-64 fixed left-0 top-0 border-r border-structural bg-canvas py-base-unit px-grid-gutter overflow-y-auto z-40">
+<div class="mt-8 mb-12">
+<h1 class="font-project-heading text-project-heading text-primary uppercase tracking-wider mb-2">Bastián Ibáñez</h1>
+<p class="font-metadata text-metadata text-ink-quiet text-xs">Software Engineer · Full-Stack &amp; Applied AI</p>
+<p class="font-metadata text-metadata text-ink-quiet text-xs mt-1">Santiago, Chile</p>
+<a class="inline-flex items-center gap-2 mt-6 font-metadata text-metadata text-primary hover:text-accent transition-colors focus-visible:ring-accent rounded-sm" href="mailto:ibanezmbastian@gmail.com">
+<span class="material-symbols-outlined text-sm">mail</span>
+                    ibanezmbastian@gmail.com
+                </a>
+</div>
+<div class="flex-1">
+<ul class="space-y-4 font-metadata text-metadata">
+<li>
+<a class="flex items-center gap-3 text-primary font-bold border-l-2 border-accent pl-4 py-1 hover:bg-surface-container-low transition-all rounded-r-sm" href="#proyectos">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">assignment</span>
+                            Proyectos
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-ink-quiet pl-4 py-1 border-l-2 border-transparent hover:text-on-surface hover:bg-surface-container-low transition-all rounded-r-sm" href="#evidencia">
+<span class="material-symbols-outlined">verified</span>
+                            Evidencia
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-ink-quiet pl-4 py-1 border-l-2 border-transparent hover:text-on-surface hover:bg-surface-container-low transition-all rounded-r-sm" href="#perfil">
+<span class="material-symbols-outlined">person</span>
+                            Perfil
+                        </a>
+</li>
+<li>
+<a class="flex items-center gap-3 text-ink-quiet pl-4 py-1 border-l-2 border-transparent hover:text-on-surface hover:bg-surface-container-low transition-all rounded-r-sm" href="#contacto">
+<span class="material-symbols-outlined">mail</span>
+                            Contacto
+                        </a>
+</li>
+</ul>
+<div class="mt-8 pl-4">
+<a class="block font-metadata text-metadata text-primary border border-structural px-4 py-2 hover:bg-surface-container-low transition-colors rounded-DEFAULT focus-visible:ring-accent w-full text-left" download href="/cv.pdf">
+                        Descargar CV PDF
+                    </a>
+</div>
+</div>
+<div class="mt-auto pt-8 border-t border-structural">
+<ul class="flex gap-4 font-metadata text-metadata text-ink-quiet">
+<li><span class="text-ink-quiet">GitHub</span></li>
+<li><span class="text-ink-quiet">LinkedIn</span></li>
+<li class="ml-auto"><span class="text-primary">ES</span> / <a class="hover:text-primary transition-colors focus-visible:ring-accent rounded-sm" href="/en/">EN</a></li>
+</ul>
+</div>
+</nav>
+<!-- Main Content -->
+<main class="flex-1 md:ml-64 px-grid-gutter py-section-gap-mobile md:py-section-gap-desktop max-w-4xl mx-auto w-full">
+<!-- Opening -->
+<section class="mb-section-gap-mobile md:mb-section-gap-desktop" id="opening">
+<h2 class="font-display text-display text-primary mb-6">Software Engineer · Full-Stack &amp; Applied AI</h2>
+<div class="font-body text-body text-on-surface-variant max-w-2xl space-y-6">
+<p>
+                        Diseño y llevo a producción productos con IA, automatización y sistemas full-stack con Python, Go y TypeScript.
+                    </p>
+<p>
+                        Trabajo desde Santiago en sistemas que conectan decisiones de software con operaciones reales.
+                    </p>
+</div>
+<div class="mt-8 flex gap-6 font-metadata text-metadata">
+<a class="text-accent flex items-center gap-1 hover:underline focus-visible:ring-accent rounded-sm" href="#proyectos">
+                        Ver proyectos <span class="material-symbols-outlined text-sm">arrow_downward</span>
+</a>
+<a class="text-ink-quiet flex items-center gap-1 hover:text-on-surface transition-colors focus-visible:ring-accent rounded-sm" href="/cv">
+                        Ver CV <span class="material-symbols-outlined text-sm">arrow_forward</span>
+</a>
+<a class="text-primary flex items-center gap-1 hover:text-accent transition-colors focus-visible:ring-accent rounded-sm" href="mailto:ibanezmbastian@gmail.com">
+                        ibanezmbastian@gmail.com
+                    </a>
+</div>
+</section>
+<!-- Systems Register -->
+<section class="mb-section-gap-mobile md:mb-section-gap-desktop" id="proyectos">
+<div class="border-b border-structural pb-4 mb-12 flex justify-between items-end">
+<h2 class="font-section-heading text-section-heading text-primary">01 // Proyectos seleccionados</h2>
+</div>
+<div class="space-y-16">
+<!-- Project 1: AI ERP -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-grid-gutter group relative">
+<!-- Metadata Column -->
+<div class="md:col-span-3 font-metadata text-metadata space-y-4">
+<div>
+<h3 class="text-primary mb-1">Contexto</h3>
+<p class="text-ink-quiet">Trabajo profesional · Caso anonimizado</p>
+</div>
+<div>
+<h3 class="text-primary mb-1">Rol</h3>
+<p class="text-ink-quiet">Diseño y operación end-to-end</p>
+</div>
+</div>
+<!-- Content Column -->
+<div class="md:col-span-9">
+<h3 class="font-project-heading text-project-heading text-primary mb-6">Agente de operaciones ERP con IA</h3>
+<div class="mb-8 border border-structural p-2 rounded-DEFAULT bg-surface-raised">
+<img alt="Diagrama abstracto del flujo del agente de operaciones ERP con IA." class="w-full h-auto rounded-sm" src="https://lh3.googleusercontent.com/aida-public/AB6AXuB88FJWoKpWJkN4Zl6RF6W3pidLg_37l5_mmjcewNcv4x8XS0fWUaBigSZP8nw_UJ2KB_nbPxy7jFLhTkBuPPeDDvyVeH7Ak1EiQqUioGqz_u2e1LIsZtMaDHgn0P-3F5NQMTI-KtcePJPZZSvtADgK9SWiBkA5Mp_Ei-kNs9RNz6T1JdDBKAe4_jIS1En9umYGoaJ7qILYQyXbyP1cuv7mtDjFOkd9241FxKZP1cgwBmgzo5sdHntE-kpnWs0pt4Jvkzt7UJiTIuKM"/>
+</div>
+<div class="font-body text-body space-y-6 text-on-surface-variant">
+<div>
+<strong class="text-primary block mb-1">Evidencia</strong>
+<p>Desplegado y operado en producción; centraliza consultas y acciones operacionales.</p>
+</div>
+<div>
+<strong class="text-primary block mb-1">Decisiones Técnicas</strong>
+<p>Escrituras ERP controladas con revisión humana; workflows durables con idempotencia, outbox y recuperación; operación reproducible en la nube.</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Divider -->
+<div class="w-full h-px bg-structural"></div>
+<!-- Project 2 -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-grid-gutter group relative">
+<div class="md:col-span-3 font-metadata text-metadata space-y-4">
+<div>
+<h3 class="text-primary mb-1">Contexto</h3>
+<p class="text-ink-quiet">Trabajo para cliente · Caso anonimizado</p>
+</div>
+</div>
+<div class="md:col-span-9">
+<h3 class="font-project-heading text-project-heading text-primary mb-6">Plataforma operacional para manufactura</h3>
+<div class="font-body text-body space-y-6 text-on-surface-variant">
+<div>
+<strong class="text-primary block mb-1">Contribución</strong>
+<p>Producto full-stack entregado a producción para operaciones de manufactura.</p>
+</div>
+<div>
+<strong class="text-primary block mb-1">Evidencia</strong>
+<p>312 pruebas automatizadas.</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Divider -->
+<div class="w-full h-px bg-structural"></div>
+<!-- Project 3 -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-grid-gutter group relative">
+<div class="md:col-span-3 font-metadata text-metadata space-y-4">
+<div>
+<h3 class="text-primary mb-1">Contexto</h3>
+<p class="text-ink-quiet">Producto público · End-to-end</p>
+</div>
+<div>
+<h3 class="text-primary mb-1">Stack</h3>
+<p class="text-ink-quiet">FastAPI, Next.js</p>
+</div>
+</div>
+<div class="md:col-span-9">
+<h3 class="font-project-heading text-project-heading text-primary mb-6">GroupFit</h3>
+<div class="font-body text-body space-y-6 text-on-surface-variant">
+<div>
+<strong class="text-primary block mb-1">Contribución</strong>
+<p>Optimización matemática de grupos.</p>
+</div>
+</div>
+</div>
+</article>
+<!-- Divider -->
+<div class="w-full h-px bg-structural"></div>
+<!-- Project 4 -->
+<article class="grid grid-cols-1 md:grid-cols-12 gap-grid-gutter group relative">
+<div class="md:col-span-3 font-metadata text-metadata space-y-4">
+<div>
+<h3 class="text-primary mb-1">Contexto</h3>
+<p class="text-ink-quiet">Open source</p>
+</div>
+</div>
+<div class="md:col-span-9">
+<h3 class="font-project-heading text-project-heading text-primary mb-6">go-agent</h3>
+<div class="font-body text-body space-y-6 text-on-surface-variant">
+<div>
+<strong class="text-primary block mb-1">Contribución</strong>
+<p>Agente/framework en Go con arquitectura hexagonal.</p>
+</div>
+<div>
+<strong class="text-primary block mb-1">Evidencia</strong>
+<p>Múltiples proveedores LLM, streaming, seguridad de herramientas y persistencia.</p>
+</div>
+</div>
+</div>
+</article>
+</div>
+</section>
+<!-- Transversal Evidence -->
+<section class="mb-section-gap-mobile md:mb-section-gap-desktop" id="evidencia">
+<div class="border-b border-structural pb-4 mb-12 flex justify-between items-end">
+<h2 class="font-section-heading text-section-heading text-primary">02 // Evidencia de ingeniería</h2>
+</div>
+<div class="space-y-4">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-structural pb-4">
+<div class="font-project-heading text-project-heading text-primary">Idempotencia y recuperación</div>
+<div class="font-body text-body text-ink-quiet">Agente de operaciones ERP con IA</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-structural pb-4">
+<div class="font-project-heading text-project-heading text-primary">Revisión humana y efectos controlados</div>
+<div class="font-body text-body text-ink-quiet">Agente de operaciones ERP con IA</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-structural pb-4">
+<div class="font-project-heading text-project-heading text-primary">Pruebas automatizadas y entrega</div>
+<div class="font-body text-body text-ink-quiet">Plataforma operacional para manufactura</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-4 border-b border-structural pb-4">
+<div class="font-project-heading text-project-heading text-primary">Arquitectura y extensibilidad</div>
+<div class="font-body text-body text-ink-quiet">go-agent</div>
+</div>
+</div>
+</section>
+<!-- Profile -->
+<section class="mb-section-gap-mobile md:mb-section-gap-desktop" id="perfil">
+<div class="border-b border-structural pb-4 mb-12 flex justify-between items-end">
+<h2 class="font-section-heading text-section-heading text-primary">03 // Perfil</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-8 font-body text-body text-on-surface-variant">
+<div>
+<h3 class="text-primary mb-2 font-project-heading text-project-heading">Enfoque</h3>
+<p class="mb-6">Sistemas full-stack, automatización operacional e IA aplicada.</p>
+<h3 class="text-primary mb-2 font-project-heading text-project-heading">Ubicación</h3>
+<p>Santiago, Chile.</p>
+</div>
+<div>
+<h3 class="text-primary mb-2 font-project-heading text-project-heading">Formación</h3>
+<p class="mb-6">Estudios universitarios en curso.</p>
+<h3 class="text-primary mb-2 font-project-heading text-project-heading">Idiomas</h3>
+<p>Español, inglés y alemán.</p>
+</div>
+</div>
+</section>
+<!-- CV & Contact -->
+<section class="mb-section-gap-mobile md:mb-section-gap-desktop" id="contacto">
+<div class="border-b border-structural pb-4 mb-12 flex justify-between items-end">
+<h2 class="font-section-heading text-section-heading text-primary">04 // CV y contacto</h2>
+</div>
+<div class="flex flex-col gap-6 font-body text-body">
+<a class="text-primary hover:text-accent transition-colors w-fit" href="/cv">Ver CV en la web</a>
+<a class="text-primary hover:text-accent transition-colors w-fit" download href="/cv.pdf">Descargar CV PDF</a>
+<a class="text-primary hover:text-accent transition-colors w-fit" href="mailto:ibanezmbastian@gmail.com">Escribir a ibanezmbastian@gmail.com</a>
+</div>
+</section>
+<!-- Footer -->
+<footer class="border-t border-structural pt-8 pb-12 mt-24">
+<div class="flex flex-col md:flex-row justify-between items-center gap-4 font-metadata text-metadata text-ink-quiet">
+<div>Santiago, Chile</div>
+<div class="flex gap-6">
+<span>GitHub</span>
+<span>LinkedIn</span>
+</div>
+<div><span class="text-primary">ES</span> / <a class="hover:text-primary transition-colors" href="/en/">EN</a></div>
+</div>
+</footer>
+</main>
+</div>
+</body></html>

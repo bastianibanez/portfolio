@@ -1,0 +1,24 @@
+{
+  "projectId": "18166645725360949066",
+  "title": "Bastián Ibáñez — Portfolio 2026",
+  "screens": [
+    {
+      "screenId": "236a5bfc7a4f4122bbfca0d092c511c2",
+      "title": "B. Ibáñez — Systems Dossier (Refined)",
+      "deviceType": "DESKTOP",
+      "artifacts": {
+        "html": ".stitch/designs/02-dossier-sistemas.html",
+        "screenshot": ".stitch/designs/02-dossier-sistemas.png"
+      }
+    }
+  ],
+  "designSystem": {
+    "assetId": "3a9ded7168424378b32a7ecd6df72bae",
+    "name": "Technical Editorial",
+    "primaryColor": "#E6ECEA",
+    "secondaryColor": "#A6B0AD",
+    "accentColor": "#2DD4BF",
+    "backgroundColor": "#090D0C",
+    "fontFamily": "IBM_PLEX_SANS"
+  }
+}

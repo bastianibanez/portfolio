@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="es"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Bastián Ibáñez - Software Engineer</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600;700&amp;family=IBM+Plex+Sans:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+        tailwind.config = {
+          darkMode: "class",
+          theme: {
+            extend: {
+              "colors": {
+                      "on-tertiary": "#003731",
+                      "error": "#ffb4ab",
+                      "on-background": "#e5e2e1",
+                      "surface-container-highest": "#353534",
+                      "tertiary-container": "#62fae3",
+                      "on-primary": "#2b3231",
+                      "on-surface": "#e5e2e1",
+                      "on-error-container": "#ffdad6",
+                      "surface-container-low": "#1c1b1b",
+                      "on-primary-fixed-variant": "#424847",
+                      "border-structural": "#26302D",
+                      "inverse-on-surface": "#313030",
+                      "secondary-fixed-dim": "#bfc9c5",
+                      "primary-fixed": "#dee4e2",
+                      "on-secondary": "#293230",
+                      "canvas": "#090D0C",
+                      "surface": "#131313",
+                      "inverse-surface": "#e5e2e1",
+                      "on-secondary-fixed-variant": "#3f4946",
+                      "on-primary-container": "#5f6664",
+                      "tertiary": "#ffffff",
+                      "surface-container-lowest": "#0e0e0e",
+                      "secondary": "#bfc9c5",
+                      "primary-fixed-dim": "#c2c8c6",
+                      "inverse-primary": "#59605e",
+                      "primary": "#ffffff",
+                      "on-tertiary-fixed-variant": "#005047",
+                      "on-tertiary-container": "#007165",
+                      "surface-container-high": "#2a2a2a",
+                      "outline-variant": "#434847",
+                      "background": "#131313",
+                      "on-tertiary-fixed": "#00201c",
+                      "surface-bright": "#393939",
+                      "primary-container": "#dee4e2",
+                      "ink-quiet": "#73807C",
+                      "outline": "#8d9290",
+                      "surface-dim": "#131313",
+                      "on-error": "#690005",
+                      "secondary-fixed": "#dbe5e1",
+                      "on-secondary-container": "#adb7b4",
+                      "surface-raised": "#111816",
+                      "tertiary-fixed-dim": "#3cddc7",
+                      "on-surface-variant": "#c3c7c6",
+                      "on-secondary-fixed": "#141d1c",
+                      "surface-tint": "#c2c8c6",
+                      "error-container": "#93000a",
+                      "secondary-container": "#3f4946",
+                      "tertiary-fixed": "#62fae3",
+                      "surface-container": "#20201f",
+                      "surface-variant": "#353534",
+                      "on-primary-fixed": "#171d1c"
+              },
+              "borderRadius": {
+                      "DEFAULT": "0.125rem",
+                      "lg": "0.25rem",
+                      "xl": "0.5rem",
+                      "full": "0.75rem"
+              },
+              "spacing": {
+                      "sub-unit": "4px",
+                      "base-unit": "8px",
+                      "section-gap-mobile": "64px",
+                      "grid-gutter": "24px",
+                      "section-gap-desktop": "128px",
+                      "container-max": "1200px"
+              },
+              "fontFamily": {
+                      "section-heading": [
+                              "IBM Plex Sans"
+                      ],
+                      "display": [
+                              "IBM Plex Sans"
+                      ],
+                      "body": [
+                              "IBM Plex Sans"
+                      ],
+                      "project-heading": [
+                              "IBM Plex Sans"
+                      ],
+                      "metadata": [
+                              "IBM Plex Mono"
+                      ]
+              },
+              "fontSize": {
+                      "section-heading": [
+                              "clamp(2rem, 4vw, 3rem)",
+                              {
+                                      "lineHeight": "1.2",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "display": [
+                              "clamp(2.75rem, 6vw, 4.5rem)",
+                              {
+                                      "lineHeight": "1.1",
+                                      "fontWeight": "600"
+                              }
+                      ],
+                      "body": [
+                              "1.125rem",
+                              {
+                                      "lineHeight": "1.55",
+                                      "fontWeight": "400"
+                              }
+                      ],
+                      "project-heading": [
+                              "1.5rem",
+                              {
+                                      "lineHeight": "1.3",
+                                      "fontWeight": "500"
+                              }
+                      ],
+                      "metadata": [
+                              "0.875rem",
+                              {
+                                      "lineHeight": "1.5",
+                                      "fontWeight": "400"
+                              }
+                      ]
+              }
+            },
+          }
+      </script>
+<style>
+          body {
+              background-color: theme('colors.canvas');
+              color: theme('colors.primary');
+          }
+      </style>
+</head>
+<body class="font-body antialiased bg-canvas text-primary">
+<!-- Top Navigation (from JSON) -->
+<nav class="fixed top-0 w-full z-50 bg-canvas dark:bg-canvas border-b border-border-structural flat no shadows">
+<div class="flex justify-between items-center h-16 px-grid-gutter max-w-container-max mx-auto">
+<div class="font-display text-project-heading font-semibold text-primary dark:text-primary">
+                B. IBÁÑEZ
+            </div>
+<div class="hidden md:flex space-x-8">
+<a class="font-metadata text-metadata uppercase tracking-wider text-primary dark:text-primary border-b border-primary hover:text-primary transition-colors duration-200 Active: opacity-80" href="#proyectos">
+                    Proyectos
+                </a>
+<a class="font-metadata text-metadata uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#experiencia">
+                    Experiencia
+                </a>
+<a class="font-metadata text-metadata uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#cv">
+                    CV
+                </a>
+</div>
+<div class="flex items-center gap-4">
+<a class="hidden md:flex font-metadata text-metadata uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
+                    GitHub
+                </a>
+<a class="hidden md:flex font-metadata text-metadata uppercase tracking-wider text-on-surface-variant dark:text-on-surface-variant hover:text-primary transition-colors duration-200" href="#">
+                    LinkedIn
+                </a>
+<div class="font-metadata text-metadata text-ink-quiet">
+<span class="text-primary">ES</span> / <span>EN</span>
+</div>
+</div>
+</div>
+</nav>
+<main class="pt-24 pb-section-gap-desktop">
+<!-- Hero Section -->
+<section class="max-w-container-max mx-auto px-grid-gutter py-section-gap-mobile md:py-section-gap-desktop">
+<div class="grid grid-cols-1 md:grid-cols-12 gap-grid-gutter">
+<div class="col-span-1 md:col-span-12">
+<h1 class="font-display text-display text-primary mb-6">
+                        Software Engineer<br/>
+<span class="text-secondary">Full-Stack &amp; Applied AI</span>
+</h1>
+</div>
+<div class="col-span-1 md:col-span-4 flex flex-col gap-2 font-metadata text-metadata text-ink-quiet border-l border-border-structural pl-4">
+<p class="flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">location_on</span>
+                        Santiago, Chile
+                    </p>
+<p class="flex items-center gap-2">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 0;">mail</span>
+                        bastian@example.com
+                    </p>
+</div>
+</div>
+</section>
+<!-- Flagship Case Section -->
+<section class="max-w-container-max mx-auto px-grid-gutter py-section-gap-desktop border-t border-border-structural" id="proyectos">
+<div class="mb-12">
+<h2 class="font-section-heading text-section-heading text-primary mb-2">Agente de operaciones ERP con IA</h2>
+<div class="flex items-center gap-4 font-metadata text-metadata text-ink-quiet">
+<span class="border border-border-structural px-2 py-1 rounded">Trabajo profesional</span>
+<span>Caso anonimizado</span>
+</div>
+</div>
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-grid-gutter">
+<!-- Visual Evidence Column -->
+<div class="lg:col-span-8 bg-surface border border-border-structural p-4 rounded-lg flex items-center justify-center">
+<img alt="Diagrama de Arquitectura AI ERP Operations Agent" class="w-full h-auto object-contain max-h-[600px] rounded" src="https://lh3.googleusercontent.com/aida-public/AB6AXuARE0JE7XHhIKq6dMAFU3hoITq-is5ZDmlBaw5pjTSkBa2lDs17E9e3bI7CpK20Vndjt4roKqql6h6KP9Xqrs_DTcIsa73tbSGrl-MWdf3Nrx7dBIPovwvE7PHsWs3Jj053wzZn5gws4zSTVG7ZRjnUJ7Er_BeX2U1Olqv0Ah22PMJBaSPHYl_sAijUrfUN-vDyRuMUIM3z436sse3HK4J6MaVz11i7zr93U5jrVARyfAs4dpDZPCetRweMKI98B_L3abCOgWzhh-8I"/>
+</div>
+<!-- Narrative Column -->
+<div class="lg:col-span-4 flex flex-col gap-8">
+<div>
+<h3 class="font-project-heading text-project-heading text-primary mb-4">El Problema Operativo</h3>
+<p class="font-body text-body text-secondary">
+                            La gestión manual de operaciones rutinarias en el sistema ERP generaba cuellos de botella, errores humanos y retrasos en la conciliación. El desafío consistía en automatizar decisiones complejas manteniendo un alto nivel de fiabilidad y auditabilidad, donde la "propiedad" de las acciones del sistema era ambigua.
+                        </p>
+</div>
+<div>
+<h3 class="font-project-heading text-project-heading text-primary mb-4">Decisiones de Arquitectura</h3>
+<ul class="space-y-4">
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed mt-1" style="font-variation-settings: 'FILL' 0;">account_tree</span>
+<div>
+<strong class="block font-metadata text-metadata text-primary">Flujos de Trabajo Duraderos (Durable Workflows)</strong>
+<span class="font-body text-body text-secondary text-sm">Implementación del patrón Outbox e idempotencia para garantizar la ejecución confiable de pasos, incluso ante fallos de red.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed mt-1" style="font-variation-settings: 'FILL' 0;">rule</span>
+<div>
+<strong class="block font-metadata text-metadata text-primary">Escrituras en ERP con Revisión (Human-in-the-loop)</strong>
+<span class="font-body text-body text-secondary text-sm">Las acciones críticas generadas por IA requieren aprobación explícita antes de mutar el estado del ERP SAP/Oracle.</span>
+</div>
+</li>
+<li class="flex items-start gap-3">
+<span class="material-symbols-outlined text-tertiary-fixed mt-1" style="font-variation-settings: 'FILL' 0;">cloud</span>
+<div>
+<strong class="block font-metadata text-metadata text-primary">Migración Cloud-Native</strong>
+<span class="font-body text-body text-secondary text-sm">Despliegue serverless para escalar la ingesta de datos y el procesamiento de eventos de manera elástica.</span>
+</div>
+</li>
+</ul>
+</div>
+<div class="bg-surface-raised p-6 border-l-2 border-tertiary-fixed">
+<h4 class="font-metadata text-metadata text-primary mb-2">Resultado</h4>
+<p class="font-body text-body text-secondary text-sm">Desplegado en producción, centralizando operaciones fragmentadas y reduciendo el tiempo de resolución de tareas rutinarias en un 65%.</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Range Section (Bento Grid) -->
+<section class="max-w-container-max mx-auto px-grid-gutter py-section-gap-desktop border-t border-border-structural">
+<h2 class="font-section-heading text-section-heading text-primary mb-8">Amplitud Técnica</h2>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-grid-gutter">
+<!-- Large Item -->
+<div class="md:col-span-2 bg-surface border border-border-structural p-8 flex flex-col justify-between group hover:border-outline transition-colors">
+<div>
+<h3 class="font-project-heading text-project-heading text-primary mb-2">Manufacturing Platform</h3>
+<p class="font-body text-body text-secondary mb-6">Plataforma integral para monitorización de métricas de piso de planta en tiempo real, integrando IoT industrial con un backend Go de alto rendimiento.</p>
+</div>
+<div class="flex gap-2">
+<span class="px-2 py-1 bg-surface-container text-primary font-metadata text-metadata text-xs border border-border-structural rounded">Go</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-metadata text-metadata text-xs border border-border-structural rounded">React</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-metadata text-metadata text-xs border border-border-structural rounded">PostgreSQL</span>
+</div>
+</div>
+<!-- Small Item 1 -->
+<div class="bg-surface border border-border-structural p-8 flex flex-col justify-between group hover:border-outline transition-colors">
+<div>
+<h3 class="font-project-heading text-project-heading text-primary mb-2">GroupFit</h3>
+<p class="font-body text-body text-secondary text-sm mb-6">Aplicación SaaS multitenant para gestión de estudios boutique y reservas, enfocada en UX resiliente y sincronización offline-first.</p>
+</div>
+<div class="flex gap-2 flex-wrap">
+<span class="px-2 py-1 bg-surface-container text-primary font-metadata text-metadata text-xs border border-border-structural rounded">TypeScript</span>
+<span class="px-2 py-1 bg-surface-container text-primary font-metadata text-metadata text-xs border border-border-structural rounded">Next.js</span>
+</div>
+</div>
+<!-- Small Item 2 -->
+<div class="md:col-span-3 bg-surface-raised border border-border-structural p-8 flex flex-col md:flex-row justify-between items-start md:items-center group hover:border-outline transition-colors gap-4">
+<div class="max-w-2xl">
+<h3 class="font-project-heading text-project-heading text-primary mb-2 flex items-center gap-2">
+<span class="material-symbols-outlined text-ink-quiet" style="font-variation-settings: 'FILL' 0;">terminal</span>
+                            go-agent
+                        </h3>
+<p class="font-body text-body text-secondary text-sm">Librería open-source en Go para la orquestación ligera de agentes LLM, diseñada para entornos de baja latencia donde frameworks más pesados resultan restrictivos.</p>
+</div>
+<a class="px-4 py-2 border border-primary text-primary hover:bg-primary hover:text-canvas transition-colors font-metadata text-metadata uppercase whitespace-nowrap" href="#">
+                        Ver Repositorio
+                    </a>
+</div>
+</div>
+</section>
+<!-- Trajectory Section -->
+<section class="max-w-container-max mx-auto px-grid-gutter py-section-gap-desktop border-t border-border-structural" id="experiencia">
+<h2 class="font-section-heading text-section-heading text-primary mb-12">Trayectoria</h2>
+<div class="border-l border-border-structural ml-2 pl-8 flex flex-col gap-12 relative">
+<div class="relative">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded bg-canvas border-2 border-tertiary-fixed"></div>
+<div class="flex flex-col md:flex-row gap-4 md:gap-12">
+<div class="md:w-1/4 font-metadata text-metadata text-ink-quiet shrink-0">
+                            2022 — Presente
+                        </div>
+<div>
+<h3 class="font-project-heading text-project-heading text-primary">Ingeniero de Software Senior</h3>
+<div class="font-metadata text-metadata text-secondary mb-4">NotoriosTI</div>
+<p class="font-body text-body text-secondary">
+                                Liderazgo técnico en la arquitectura de soluciones backend críticas. Diseño y despliegue del agente de operaciones ERP. Mentoreo de ingenieros junior y establecimiento de estándares de CI/CD para infraestructura inmutable.
+                            </p>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded bg-canvas border-2 border-border-structural"></div>
+<div class="flex flex-col md:flex-row gap-4 md:gap-12">
+<div class="md:w-1/4 font-metadata text-metadata text-ink-quiet shrink-0">
+                            2019 — 2022
+                        </div>
+<div>
+<h3 class="font-project-heading text-project-heading text-primary">Ingeniero Full-Stack</h3>
+<div class="font-metadata text-metadata text-secondary mb-4">Agencia de Desarrollo de Software (Client Delivery)</div>
+<p class="font-body text-body text-secondary">
+                                Desarrollo integral de aplicaciones web complejas para clientes B2B. Desde la toma de requerimientos y modelado de datos, hasta la implementación del frontend reactivo y optimización de consultas SQL pesadas. Participación clave en el proyecto 'Manufacturing Platform'.
+                            </p>
+</div>
+</div>
+</div>
+<div class="relative">
+<div class="absolute -left-[41px] top-1 w-4 h-4 rounded bg-canvas border-2 border-border-structural"></div>
+<div class="flex flex-col md:flex-row gap-4 md:gap-12">
+<div class="md:w-1/4 font-metadata text-metadata text-ink-quiet shrink-0">
+                            2018 — Presente
+                        </div>
+<div>
+<h3 class="font-project-heading text-project-heading text-primary">Contribuidor Open-Source</h3>
+<div class="font-metadata text-metadata text-secondary mb-4">Proyectos Independientes</div>
+<p class="font-body text-body text-secondary">
+                                Mantenimiento activo de librerías, con un enfoque en herramientas para ecosistemas Go y utilidades de automatización local.
+                            </p>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer (from JSON) -->
+<footer class="w-full py-section-gap-mobile bg-surface dark:bg-surface border-t border-border-structural flat no shadows" id="cv">
+<div class="max-w-container-max mx-auto px-grid-gutter flex flex-col md:flex-row justify-between items-start gap-base-unit">
+<div class="flex flex-col gap-4 w-full md:w-auto">
+<div class="font-metadata text-metadata font-bold text-secondary dark:text-secondary">
+                    © 2024 BASTIÁN IBÁÑEZ — ENGINEERED IN SANTIAGO
+                </div>
+<a class="inline-flex items-center gap-2 px-6 py-3 bg-canvas border border-primary text-primary hover:bg-primary hover:text-canvas transition-colors font-metadata text-metadata uppercase self-start" href="#">
+<span class="material-symbols-outlined text-sm" style="font-variation-settings: 'FILL' 0;">picture_as_pdf</span>
+                    Descargar CV
+                </a>
+</div>
+<div class="flex flex-col md:flex-row gap-6 mt-8 md:mt-0 font-metadata text-metadata">
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">LinkedIn</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">GitHub</a>
+<a class="text-on-surface-variant hover:text-primary transition-colors" href="#">Source</a>
+</div>
+</div>
+</footer>
+</body></html>
