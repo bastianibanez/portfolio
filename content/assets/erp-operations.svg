@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 420" aria-hidden="true">
+  <rect width="1200" height="420" fill="#090D0C"/>
+  <g fill="none" stroke="#26302D" stroke-width="2">
+    <rect x="24" y="112" width="180" height="104" rx="4"/>
+    <rect x="270" y="112" width="180" height="104" rx="4"/>
+    <rect x="516" y="56" width="220" height="216" rx="4"/>
+    <rect x="802" y="72" width="170" height="88" rx="4"/>
+    <rect x="802" y="184" width="170" height="88" rx="4"/>
+    <rect x="1038" y="112" width="138" height="104" rx="4"/>
+  </g>
+  <g stroke="#2DD4BF" stroke-width="3" fill="none">
+    <path d="M204 164h66m180 0h66m220-52h66m-66 108h66m170-56h66"/>
+    <path d="m258 154 12 10-12 10m246-20 12 10-12 10m286-72 12 10-12 10m0 98 12 10-12 10m236-66 12 10-12 10"/>
+    <path d="M887 272v60H626v-60" stroke-dasharray="8 8"/>
+  </g>
+  <g fill="#E6ECEA" font-family="IBM Plex Mono, monospace" font-size="20" text-anchor="middle">
+    <text x="114" y="156">MESSAGING</text><text x="114" y="184">DOCUMENTS</text>
+    <text x="360" y="156">DURABLE</text><text x="360" y="184">INGRESS</text>
+    <text x="626" y="132">SUPERVISOR</text><text x="626" y="166">SPECIALISTS</text><text x="626" y="220" fill="#A6B0AD">HUMAN REVIEW</text>
+    <text x="887" y="126">ERP</text><text x="887" y="238">ANALYTICS</text>
+    <text x="1107" y="156">DURABLE</text><text x="1107" y="184">OUTPUT</text>
+  </g>
+  <text x="626" y="382" fill="#73807C" font-family="IBM Plex Mono, monospace" font-size="16" text-anchor="middle">IDEMPOTENCY · OUTBOX · RECOVERY · AUDIT</text>
+</svg>

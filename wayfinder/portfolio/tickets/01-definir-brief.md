@@ -22,7 +22,7 @@ Los cuatro casos principales serán:
 
 1. **Agente de operaciones ERP con IA** — caso profesional anonimizado basado en `juan-core`; flagship.
 2. **Plataforma operacional para manufactura** — caso freelance anonimizado y entregado a producción.
-3. **GroupFit** — producto público end-to-end con optimización matemática.
+3. **GroupFit** — producto propio end-to-end para planificación bajo restricciones; repositorio privado.
 4. **go-agent** — agente/framework en Go con arquitectura hexagonal.
 
 `env-manager`/`env-manager-js` aparecerán como librerías secundarias y el sitio industrial B2B como entrega freelance breve.

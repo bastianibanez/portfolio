@@ -8,6 +8,7 @@ assignee:
 blocked_by:
   - 03-elegir-direccion.md
   - 04-preparar-contenido.md
+  - 08-regenerar-cv.md
 ---
 
 ## Question

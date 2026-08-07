@@ -26,13 +26,12 @@ Diseñar, implementar y publicar en `bastianibanez.com` un portafolio bilingüe 
 - [Definir el brief de producto y posicionamiento](tickets/01-definir-brief.md) — Portafolio bilingüe para reclutadores, con posicionamiento Full-Stack & Applied AI, cuatro casos principales, estética editorial dark y arquitectura Astro/Cloudflare.
 - [Generar cuatro direcciones visuales en Stitch](tickets/02-generar-direcciones-stitch.md) — Se eligió Dossier de sistemas: rail lateral, registros editoriales técnicos, jerarquía tipográfica fuerte y acento turquesa funcional; el marco violeta de Stitch no forma parte del diseño.
 - [Refinar el Dossier de sistemas seleccionado](tickets/03-elegir-direccion.md) — Se consolidó la portada en español con cuatro proyectos factuales, evidencia vinculada, rutas de CV y adaptación móvil; es la referencia definitiva para implementación.
+- [Preparar el contenido bilingüe y los artefactos de proyecto](tickets/04-preparar-contenido.md) — Copy ES/EN, CV web, metadatos y cuatro diagramas saneados quedaron listos; se corrigieron los estados privados de GroupFit/go-agent y la evidencia de pruebas de manufactura.
 
 ## Not yet specified
 
 - Si la primera versión incorporará Cloudflare Web Analytics o se medirá únicamente mediante métricas técnicas de producción.
 - Qué elementos interactivos futuros justificarán islas React o rutas dinámicas en Workers.
-- Qué capturas, diagramas y artefactos saneados representarán mejor los casos privados una vez elegida la dirección visual.
-- Si habrá una actualización posterior del contenido del CV para alinearlo completamente con el nuevo posicionamiento bilingüe.
 
 ## Out of scope
 
@@ -40,3 +39,4 @@ Diseñar, implementar y publicar en `bastianibanez.com` un portafolio bilingüe 
 - Formulario de contacto y automatización de email en la primera versión.
 - Retrato personal y light mode.
 - Publicar nombres, URLs, prompts, métricas no verificadas o información sensible de clientes y proyectos privados.
+- Cambiar la visibilidad de repositorios privados para alimentar el portafolio; GroupFit y go-agent se presentarán sin enlace de código en esta versión.

@@ -28,7 +28,7 @@ No gradients, neon, glow, translucent glass, colorful shadows or large turquoise
 - **Navigation:** compact, text-led, keyboard accessible, with a visible current-page state. No logo mark is required; use the name or initials plainly.
 - **Links and CTA:** email is the sole primary action. Use text links or squared buttons with 4px corners, visible underline/focus and restrained active feedback.
 - **Project entries:** prefer editorial rows, dividers and asymmetric columns. Cards are allowed only when a project is an independent navigable object; maximum 8px corner radius, flat surfaces, no ambient shadow.
-- **Tags:** use plain comma-separated metadata or compact labels. Pills only for a truthful status such as “Producción” or “Open source”.
+- **Tags:** use plain comma-separated metadata or compact labels. Pills only for a truthful status such as “Producción” or “Repositorio privado”.
 - **Diagrams:** simple lines, nodes and arrows representing real architecture. No fake dashboards, terminals, logs or code.
 - **Icons:** one restrained outline family at 16–20px, only when meaning improves; never decorative AI, sparkles, brain or circuit icons.
 
@@ -52,7 +52,7 @@ No gradients, neon, glow, translucent glass, colorful shadows or large turquoise
 
 - Write specific, factual copy using active verbs. Every claim points to a project, decision or verifiable result.
 - Private work is labelled “Trabajo profesional · Caso anonimizado” or “Trabajo para cliente · Caso anonimizado”. Never expose client names, private repositories, internal identifiers, prompts or sensitive screenshots.
-- Do not invent metrics. “312 pruebas automatizadas” is allowed only for the manufacturing platform. Production status, delivered status and public repositories are valid evidence.
+- Do not invent metrics. The manufacturing platform has 255 unit tests in 57 files, verified on 2026-08-07. Production status, delivered status and repository visibility must follow `content/README.md`.
 - Spanish is primary; English mirrors the same hierarchy and evidence under `/en/`.
 
 ## 8. Anti-Patterns (Banned)
