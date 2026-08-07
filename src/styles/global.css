@@ -335,7 +335,7 @@ ul {
 
 .technology-strip__track {
   display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
+  grid-template-columns: repeat(11, minmax(0, 1fr));
   gap: clamp(0.3rem, 0.9vw, 0.7rem);
   margin: 0;
   padding: 0;
@@ -395,8 +395,8 @@ ul {
   font-size: 0.74rem;
 }
 
-.project-list {
-  border-top: 1px solid var(--border);
+.section--projects .section-heading {
+  margin-bottom: 0;
 }
 
 .project-entry {
@@ -863,7 +863,7 @@ ul {
   }
 
   .technology-strip__track {
-    grid-template-columns: repeat(12, 5rem);
+    grid-template-columns: repeat(11, 5rem);
     width: max-content;
   }
 
