@@ -1,6 +1,6 @@
 ---
 title: Crear y publicar el portafolio profesional de Bastián
-status: open
+status: closed
 labels:
   - wayfinder:map
 tracker: local-markdown
@@ -30,11 +30,11 @@ Diseñar, implementar y publicar en `bastianibanez.com` un portafolio bilingüe 
 - [Regenerar los CV PDF bilingües de una página](tickets/08-regenerar-cv.md) — Los CV ES/EN quedaron generados en A4 con el contenido aprobado, enlaces activos, texto seleccionable, metadatos de idioma y composición Dossier de sistemas.
 - [Implementar el portafolio en Astro](tickets/05-implementar-astro.md) — El sitio estático bilingüe quedó construido con inicio, CV y cuatro casos por idioma, contenido tipado, cero JavaScript cliente y configuración de Workers Static Assets.
 - [Verificar accesibilidad, rendimiento, SEO y privacidad](tickets/06-verificar-calidad.md) — Las 14 páginas pasan WCAG automatizado, teclado, responsive, SEO bilingüe, privacidad y cabeceras; Lighthouse móvil obtuvo 99–100 en rendimiento y 100 en las otras categorías, con LCP ≤ 1,7 s, CLS ≤ 0,001 y TBT 0 ms.
+- [Publicar bastianibanez.com en Cloudflare](tickets/07-publicar-cloudflare.md) — El portafolio quedó publicado mediante Workers Static Assets y Custom Domain, con HTTPS forzado, `www` canónico, rutas y query preservadas y auditoría pública completa; Lighthouse obtuvo 100 en las cuatro categorías verificadas.
 
 ## Not yet specified
 
-- Si la primera versión incorporará Cloudflare Web Analytics o se medirá únicamente mediante métricas técnicas de producción.
-- Qué elementos interactivos futuros justificarán islas React o rutas dinámicas en Workers.
+- Ninguno para la versión 1 publicada.
 
 ## Out of scope
 
@@ -43,3 +43,5 @@ Diseñar, implementar y publicar en `bastianibanez.com` un portafolio bilingüe 
 - Retrato personal y light mode.
 - Publicar nombres, URLs, prompts, métricas no verificadas o información sensible de clientes y proyectos privados.
 - Cambiar la visibilidad de repositorios privados para alimentar el portafolio; GroupFit y go-agent se presentarán sin enlace de código en esta versión.
+- Cloudflare Web Analytics en la versión 1; la medición inicial se limita a auditorías técnicas para conservar cero JavaScript cliente.
+- Islas React o rutas dinámicas sin un requisito interactivo concreto.

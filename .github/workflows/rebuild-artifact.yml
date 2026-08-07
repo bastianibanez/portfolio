@@ -1,0 +1,81 @@
+name: Rebuild artifact
+
+on:
+  workflow_dispatch:
+    inputs:
+      pr_number:
+        description: Pull request number to rebuild
+        required: true
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: rebuild-pr-${{ inputs.pr_number }}
+  cancel-in-progress: false
+
+env:
+  NODE_VERSION: 22.12.0
+
+jobs:
+  rebuild:
+    name: Rebuild reviewed artifact
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - name: Resolve pull request head
+        id: pr
+        shell: bash
+        run: |
+          set -euo pipefail
+          pr="$(gh api "repos/${GITHUB_REPOSITORY}/pulls/${{ inputs.pr_number }}")"
+
+          if [[ "$(jq -r '.base.ref' <<< "$pr")" != "main" ]]; then
+            echo "PR #${{ inputs.pr_number }} does not target main." >&2
+            exit 1
+          fi
+
+          echo "repository=$(jq -r '.head.repo.full_name' <<< "$pr")" >> "$GITHUB_OUTPUT"
+          echo "sha=$(jq -r '.head.sha' <<< "$pr")" >> "$GITHUB_OUTPUT"
+
+      - name: Check out exact PR commit
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: ${{ steps.pr.outputs.repository }}
+          ref: ${{ steps.pr.outputs.sha }}
+          persist-credentials: false
+
+      - name: Set up Node.js
+        uses: actions/setup-node@820762786026740c76f36085b0efc47a31fe5020 # v7.0.0
+        with:
+          node-version: ${{ env.NODE_VERSION }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci --prefer-offline --no-audit --no-fund
+
+      - name: Run Astro checks
+        run: npm run check
+
+      - name: Rebuild site
+        run: npm run build
+
+      - name: Store recovery artifact
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        with:
+          name: site-pr-${{ inputs.pr_number }}-${{ steps.pr.outputs.sha }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 1
+          compression-level: 6
+
+      - name: Publish recovery instructions
+        run: |
+          {
+            echo "### Artifact rebuilt"
+            echo "PR #${{ inputs.pr_number }} at ${{ steps.pr.outputs.sha }}"
+            echo "Retry the failed Production workflow run."
+          } >> "$GITHUB_STEP_SUMMARY"

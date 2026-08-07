@@ -601,6 +601,19 @@ ul {
   background: var(--raised);
 }
 
+.project-figure__viewport {
+  overflow-x: auto;
+  overscroll-behavior-inline: contain;
+  scrollbar-color: var(--quiet) var(--canvas);
+  scrollbar-width: thin;
+}
+
+.project-figure__viewport:focus-visible {
+  border-radius: 2px;
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+}
+
 .project-figure img {
   width: 100%;
   height: auto;
@@ -883,6 +896,13 @@ ul {
   .additional-grid,
   .decision {
     grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .project-figure__viewport img {
+    width: 720px;
+    max-width: none;
   }
 }
 

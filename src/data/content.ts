@@ -167,7 +167,7 @@ const esProjects: Project[] = [
       "Docker",
       "GCP",
     ],
-    asset: "/assets/erp-operations.svg",
+    asset: "/assets/erp-operations.svg?v=2",
     assetAlt:
       "Flujo abstraído desde mensajería y documentos hacia una cola durable, un supervisor con especialistas, controles humanos, ERP y respuesta registrada.",
     caption:
@@ -206,7 +206,7 @@ const esProjects: Project[] = [
       "Playwright",
       "Cloudflare Workers",
     ],
-    asset: "/assets/manufacturing-platform.svg",
+    asset: "/assets/manufacturing-platform.svg?v=2",
     assetAlt:
       "Plataforma operacional donde compras, calidad y fabricación escriben en un libro mayor de inventario que alimenta ventas y reportes.",
     caption:
@@ -244,7 +244,7 @@ const esProjects: Project[] = [
       "TypeScript",
       "Docker",
     ],
-    asset: "/assets/groupfit.svg",
+    asset: "/assets/groupfit.svg?v=2",
     assetAlt:
       "Flujo de GroupFit desde archivos de entrada hacia validación, heurística, reparación, optimización matemática y resultados explicables.",
     caption:
@@ -274,7 +274,7 @@ const esProjects: Project[] = [
     evidence:
       "Cuatro adaptadores de modelos · streaming y cancelación · política de confirmación para acciones sensibles · suite Go verificada el 7 de agosto de 2026.",
     stack: ["Go", "Bubble Tea", "SQLite", "APIs de modelos", "Herramientas de sistema"],
-    asset: "/assets/go-agent.svg",
+    asset: "/assets/go-agent.svg?v=2",
     assetAlt:
       "Arquitectura hexagonal de go-agent con interfaz terminal, núcleo del agente, adaptadores de modelos, herramientas y persistencia.",
     caption:
@@ -316,7 +316,7 @@ const enProjects: Project[] = [
       "Docker",
       "GCP",
     ],
-    asset: "/assets/erp-operations.svg",
+    asset: "/assets/erp-operations.svg?v=2",
     assetAlt:
       "Abstract flow from messaging and documents through a durable queue, supervisor and specialists, human controls, ERP, and a recorded response.",
     caption:
@@ -355,7 +355,7 @@ const enProjects: Project[] = [
       "Playwright",
       "Cloudflare Workers",
     ],
-    asset: "/assets/manufacturing-platform.svg",
+    asset: "/assets/manufacturing-platform.svg?v=2",
     assetAlt:
       "Operations platform where purchasing, quality and manufacturing write to an inventory ledger that feeds sales and reporting.",
     caption:
@@ -393,7 +393,7 @@ const enProjects: Project[] = [
       "TypeScript",
       "Docker",
     ],
-    asset: "/assets/groupfit.svg",
+    asset: "/assets/groupfit.svg?v=2",
     assetAlt:
       "GroupFit flow from input files through validation, heuristic scheduling, repair, mathematical optimization, and explainable outputs.",
     caption:
@@ -423,7 +423,7 @@ const enProjects: Project[] = [
     evidence:
       "Four model adapters · streaming and cancellation · confirmation policy for sensitive actions · Go test suite verified on August 7, 2026.",
     stack: ["Go", "Bubble Tea", "SQLite", "Model APIs", "System tools"],
-    asset: "/assets/go-agent.svg",
+    asset: "/assets/go-agent.svg?v=2",
     assetAlt:
       "Hexagonal go-agent architecture with a terminal interface, agent core, model adapters, tools, and persistence.",
     caption:
@@ -452,7 +452,7 @@ export const content: Record<Locale, SiteContent> = {
       "Casos de ingeniería con evidencia: agentes para operaciones ERP, software de manufactura, optimización matemática y tooling en Go.",
     languageLabel: "Español",
     alternateLanguageLabel: "English",
-    routes: { home: "/", cv: "/cv", pdf: "/cv.pdf" },
+    routes: { home: "/", cv: "/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv.pdf" },
     nav: {
       projects: "Proyectos",
       evidence: "Evidencia",
@@ -636,7 +636,7 @@ export const content: Record<Locale, SiteContent> = {
       "Evidence-led engineering cases spanning ERP operations agents, manufacturing software, mathematical optimization, and Go tooling.",
     languageLabel: "English",
     alternateLanguageLabel: "Español",
-    routes: { home: "/en/", cv: "/en/cv", pdf: "/en/cv.pdf" },
+    routes: { home: "/en/", cv: "/en/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv.pdf" },
     nav: {
       projects: "Projects",
       evidence: "Evidence",
