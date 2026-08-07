@@ -158,11 +158,13 @@ Después de producción exitosa:
 
 Al cerrar sin merge se hace lo mismo. La ausencia previa del Worker se trata como éxito idempotente; otros errores de Cloudflare se propagan. La eliminación de artifacts usa `if: always()` en el cierre abandonado para que un problema con el Worker no deje también artifacts retenidos.
 
+El Worker se elimina mediante el endpoint oficial `DELETE /accounts/{account_id}/workers/scripts/{script_name}?force=true`, no mediante `wrangler delete`. El endpoint directo necesita únicamente `Workers Scripts: Write`; Wrangler intentaba listar namespaces KV antes de borrar un Worker con assets y habría obligado a ampliar innecesariamente el token.
+
 Si producción falla antes del cleanup, se conservan preview y artifact para diagnóstico y reintento.
 
 ### 16. Cachés y optimizaciones
 
-Se activó el caché npm de `actions/setup-node` en CI, Build, Preview, producción y cleanup. Las instalaciones usan `--prefer-offline`, y se omiten `audit` y mensajes de financiación dentro del pipeline.
+Se activó el caché npm de `actions/setup-node` en CI, Build, Preview y producción. Las instalaciones usan `--prefer-offline`, y se omiten `audit` y mensajes de financiación dentro del pipeline. El cleanup abandonado no instala Node ni restaura npm porque la eliminación directa usa las herramientas preinstaladas `curl`, `jq` y `gh`.
 
 Wrangler se fija en la versión `4.120.0` y se ejecuta con `npx`. El caché npm evita volver a descargar el paquete completo en cada job. Cloudflare también evita subir assets que ya existen: en la validación observada reportó `No updated asset files to upload`.
 
@@ -173,7 +175,7 @@ No se cachea `dist/` con un caché mutable: se usa un artifact inmutable, audita
 - Node está fijado en `22.12.0`.
 - Wrangler está fijado en `4.120.0`.
 - Las GitHub Actions de terceros están fijadas por SHA completo, con la versión legible en un comentario.
-- El token activo de Cloudflare está limitado a escritura de Workers en la cuenta.
+- El token activo de Cloudflare tiene `Workers Scripts: Write` en la cuenta y `Workers Routes: Write` solo para `bastianibanez.com`.
 - `CLOUDFLARE_API_TOKEN` es un secret de Actions.
 - `CLOUDFLARE_ACCOUNT_ID` es una variable del repositorio.
 - Los workflows declaran permisos GitHub mínimos por caso.
@@ -204,11 +206,14 @@ El artifact exacto se creó con expiración de siete días. El comentario del PR
 
 La protección de `main` se verificó con `CI` y `Build` como checks obligatorios. El PR quedó `MERGEABLE` y `CLEAN` con todos los checks verdes.
 
+La primera ejecución real de producción fue el run `31218757780`, para el merge commit `aa5ac33754dc7dbd6d125f5c316a999c44d5b833`. Confirmó que el job resolvió el PR fusionado, encontró y descargó el artifact exacto, validó `dist/index.html` y desplegó el build sin ejecutar CI ni compilar nuevamente. También expuso dos permisos que el dry-run no podía detectar; se documentan a continuación.
+
 ## Qué fue efectivo
 
 - La cadena CI → Build → Preview respetó el orden previsto.
 - La separación de checks entregó señales claras y permitió proteger `main` exactamente con CI y Build.
 - El artifact quedó vinculado al SHA correcto y fue consumido por el preview sin volver a compilar.
+- Producción encontró y desplegó ese mismo artifact después del merge, sin CI ni rebuild.
 - El preview efímero quedó accesible y actualizable bajo una URL estable por PR.
 - El comentario idempotente evitó spam en el pull request.
 - La concurrencia compartida cerró la carrera entre deploy de preview y cleanup.
@@ -234,11 +239,21 @@ Decidimos aceptar este warning antes que ejecutar otro `npm ci` completo solo pa
 
 La claridad y protección independiente cuestan un segundo runner y un segundo `npm ci`. Para este proyecto, las duraciones de 23 y 21 segundos siguen siendo pequeñas. Si el proyecto crece, se puede valorar un único job obligatorio o compartir dependencias, teniendo cuidado de no convertir `node_modules` en un artifact inseguro o dependiente del entorno.
 
-### Producción todavía no ejecutada en vivo
+### Permiso de ruta ausente en el primer deploy
 
-El flujo de producción pasó validación de sintaxis, `actionlint`, dry-run de Wrangler y revisión de resolución del artifact, pero no se desplegó realmente porque el PR aún no se ha fusionado. La primera fusión es la prueba end-to-end pendiente de deploy, eliminación de preview y eliminación del artifact.
+El primer intento subió correctamente el Worker de producción, pero Cloudflare rechazó actualizar la ruta de `bastianibanez.com` con error de autenticación `10000`. `Workers Scripts: Write` no cubre `PUT /zones/{zone_id}/workers/routes`.
 
-No debe declararse esa parte como comprobada hasta observar una ejecución exitosa de `Production`.
+Se agregó `Workers Routes: Write` limitado exclusivamente a la zona `bastianibanez.com`. El reintento desplegó producción correctamente. No se concedió acceso a las demás zonas de la cuenta.
+
+### `wrangler delete` pidió acceso a KV
+
+Después del deploy correcto, `wrangler delete` intentó consultar `/storage/kv/namespaces` antes de eliminar el preview y falló con error `10000`. Dar acceso a KV habría ampliado el token para resolver un detalle interno de la CLI.
+
+Se reemplazó la CLI por el endpoint oficial de eliminación de scripts, que acepta `Workers Scripts: Write`. El workflow considera HTTP 200/204 como eliminación exitosa, HTTP 404 como estado idempotente y propaga cualquier otra respuesta.
+
+### El dry-run no valida permisos efectivos
+
+La sintaxis, `actionlint` y el dry-run de Wrangler fueron útiles, pero no hicieron llamadas de ruta ni cleanup y por eso no detectaron los permisos faltantes. Una validación de CI/CD con servicios externos no se considera completa hasta observar el primer ciclo real de deploy y cleanup.
 
 ## Dónde se ahorran recursos
 
@@ -253,6 +268,7 @@ No debe declararse esa parte como comprobada hasta observar una ejecución exito
 | No desplegar previews de forks          | Evita runners de deploy y protege secretos.                          |
 | Cloudflare omite assets sin cambios     | Reduce transferencia y tiempo de upload.                             |
 | Cleanup inmediato                       | Reduce almacenamiento de artifacts y cantidad de Workers efímeros.   |
+| Delete directo por API                  | Evita iniciar Wrangler y restaurar npm en cleanup abandonado.        |
 | Retención limitada                      | Evita acumulación si un evento de cleanup no llega a ejecutarse.     |
 | Timeouts cortos                         | Acota el gasto máximo ante bloqueos.                                 |
 | Sin Lighthouse/E2E/audit en cada PR     | Conserva el pipeline enfocado en errores que bloquean compilación.   |
