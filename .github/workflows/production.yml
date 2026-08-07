@@ -1,6 +1,8 @@
 name: Production
 
 on:
+  push:
+    branches: [main]
   pull_request:
     branches: [main]
     types: [closed]
@@ -15,15 +17,46 @@ concurrency:
 
 env:
   WRANGLER_VERSION: 4.120.0
-  ARTIFACT_NAME: site-pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
-  PREVIEW_WORKER: bastian-ibanez-portfolio-pr-${{ github.event.pull_request.number }}
 
 jobs:
+  resolve-production:
+    name: Resolve merged PR
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    timeout-minutes: 3
+    env:
+      GH_TOKEN: ${{ github.token }}
+    outputs:
+      number: ${{ steps.pr.outputs.number }}
+      head-repo: ${{ steps.pr.outputs.head-repo }}
+      head-sha: ${{ steps.pr.outputs.head-sha }}
+    steps:
+      - name: Resolve PR associated with main commit
+        id: pr
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$(gh api "repos/${GITHUB_REPOSITORY}/commits/${GITHUB_SHA}/pulls")"
+          pr="$(jq -c \
+            '[.[] | select(.base.ref == "main" and .merged_at != null)] | sort_by(.merged_at) | last // empty' \
+            <<< "$response")"
+
+          if [[ -z "$pr" ]]; then
+            echo "Commit $GITHUB_SHA is not associated with a merged PR targeting main." >&2
+            exit 1
+          fi
+
+          {
+            echo "number=$(jq -r '.number' <<< "$pr")"
+            echo "head-repo=$(jq -r '.head.repo.full_name' <<< "$pr")"
+            echo "head-sha=$(jq -r '.head.sha' <<< "$pr")"
+          } >> "$GITHUB_OUTPUT"
+
   deploy:
     name: Deploy production
-    if: github.event.pull_request.merged == true
+    needs: resolve-production
     concurrency:
-      group: preview-pr-${{ github.event.pull_request.number }}
+      group: preview-pr-${{ needs.resolve-production.outputs.number }}
       cancel-in-progress: true
     runs-on: ubuntu-latest
     timeout-minutes: 10
@@ -32,11 +65,13 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       GH_TOKEN: ${{ github.token }}
       NO_COLOR: "1"
+      ARTIFACT_NAME: site-pr-${{ needs.resolve-production.outputs.number }}-${{ needs.resolve-production.outputs.head-sha }}
+      PREVIEW_WORKER: bastian-ibanez-portfolio-pr-${{ needs.resolve-production.outputs.number }}
     steps:
       - name: Check out merged deployment config
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
-          ref: ${{ github.event.pull_request.merge_commit_sha }}
+          ref: ${{ github.sha }}
 
       - name: Locate reviewed build artifact
         id: artifact
@@ -50,13 +85,13 @@ jobs:
             -F per_page=100)"
 
           artifact="$(jq -c \
-            --arg sha "${{ github.event.pull_request.head.sha }}" \
+            --arg sha "${{ needs.resolve-production.outputs.head-sha }}" \
             '[.artifacts[] | select(.expired == false and .workflow_run.head_sha == $sha)] | sort_by(.created_at) | last // empty' \
             <<< "$response")"
 
           if [[ -z "$artifact" ]]; then
             echo "No unexpired artifact found for $ARTIFACT_NAME." >&2
-            echo "Run the Rebuild artifact workflow for PR #${{ github.event.pull_request.number }}, then retry this job." >&2
+            echo "Run the Rebuild artifact workflow for PR #${{ needs.resolve-production.outputs.number }}, then retry this job." >&2
             exit 1
           fi
 
@@ -77,10 +112,10 @@ jobs:
         run: |
           npx --yes "wrangler@${WRANGLER_VERSION}" deploy \
             --config wrangler.jsonc \
-            --message "PR #${{ github.event.pull_request.number }} @ ${{ github.event.pull_request.head.sha }}"
+            --message "PR #${{ needs.resolve-production.outputs.number }} @ ${{ needs.resolve-production.outputs.head-sha }}"
 
       - name: Delete preview Worker
-        if: github.event.pull_request.head.repo.full_name == github.repository
+        if: needs.resolve-production.outputs.head-repo == github.repository
         shell: bash
         run: |
           set -euo pipefail
@@ -120,7 +155,7 @@ jobs:
 
   cleanup-abandoned:
     name: Cleanup abandoned PR
-    if: github.event.pull_request.merged == false
+    if: github.event_name == 'pull_request' && github.event.pull_request.merged == false
     concurrency:
       group: preview-pr-${{ github.event.pull_request.number }}
       cancel-in-progress: true
@@ -131,6 +166,8 @@ jobs:
       CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
       GH_TOKEN: ${{ github.token }}
       NO_COLOR: "1"
+      ARTIFACT_NAME: site-pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+      PREVIEW_WORKER: bastian-ibanez-portfolio-pr-${{ github.event.pull_request.number }}
     steps:
       - name: Check out cleanup config
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
