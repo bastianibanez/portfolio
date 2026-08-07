@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "astro dev",
     "build": "astro build && node scripts/finalize-build.mjs",
+    "deploy": "npm run build && wrangler deploy",
     "audit:site": "node scripts/audit-site.mjs",
     "check": "astro check",
     "preview": "astro preview",
