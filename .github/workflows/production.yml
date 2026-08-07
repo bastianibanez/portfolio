@@ -1,0 +1,171 @@
+name: Production
+
+on:
+  pull_request:
+    branches: [main]
+    types: [closed]
+
+permissions:
+  actions: write
+  contents: read
+
+concurrency:
+  group: production
+  cancel-in-progress: false
+
+env:
+  WRANGLER_VERSION: 4.120.0
+  ARTIFACT_NAME: site-pr-${{ github.event.pull_request.number }}-${{ github.event.pull_request.head.sha }}
+  PREVIEW_WORKER: bastian-ibanez-portfolio-pr-${{ github.event.pull_request.number }}
+
+jobs:
+  deploy:
+    name: Deploy production
+    if: github.event.pull_request.merged == true
+    concurrency:
+      group: preview-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      GH_TOKEN: ${{ github.token }}
+      NO_COLOR: "1"
+    steps:
+      - name: Check out merged deployment config
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          ref: ${{ github.event.pull_request.merge_commit_sha }}
+
+      - name: Locate reviewed build artifact
+        id: artifact
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$(gh api \
+            --method GET \
+            "repos/${GITHUB_REPOSITORY}/actions/artifacts" \
+            -f name="$ARTIFACT_NAME" \
+            -F per_page=100)"
+
+          artifact="$(jq -c \
+            --arg sha "${{ github.event.pull_request.head.sha }}" \
+            '[.artifacts[] | select(.expired == false and .workflow_run.head_sha == $sha)] | sort_by(.created_at) | last // empty' \
+            <<< "$response")"
+
+          if [[ -z "$artifact" ]]; then
+            echo "No unexpired artifact found for $ARTIFACT_NAME." >&2
+            echo "Run the Rebuild artifact workflow for PR #${{ github.event.pull_request.number }}, then retry this job." >&2
+            exit 1
+          fi
+
+          echo "run-id=$(jq -r '.workflow_run.id' <<< "$artifact")" >> "$GITHUB_OUTPUT"
+
+      - name: Download reviewed build artifact
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+        with:
+          name: ${{ env.ARTIFACT_NAME }}
+          path: dist
+          github-token: ${{ github.token }}
+          run-id: ${{ steps.artifact.outputs.run-id }}
+
+      - name: Verify deployable site
+        run: test -f dist/index.html
+
+      - name: Deploy cached build to production
+        run: |
+          npx --yes "wrangler@${WRANGLER_VERSION}" deploy \
+            --config wrangler.jsonc \
+            --message "PR #${{ github.event.pull_request.number }} @ ${{ github.event.pull_request.head.sha }}"
+
+      - name: Delete preview Worker
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          output_file="$(mktemp)"
+          if npx --yes "wrangler@${WRANGLER_VERSION}" delete "$PREVIEW_WORKER" \
+            --config wrangler.preview.jsonc \
+            --force 2>&1 | tee "$output_file"; then
+            exit 0
+          fi
+
+          if grep -qiE 'not found|does not exist|no worker' "$output_file"; then
+            echo "Preview Worker was already absent."
+            exit 0
+          fi
+
+          exit 1
+
+      - name: Delete consumed build artifacts
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$(gh api \
+            --method GET \
+            "repos/${GITHUB_REPOSITORY}/actions/artifacts" \
+            -f name="$ARTIFACT_NAME" \
+            -F per_page=100)"
+
+          mapfile -t artifact_ids < <(jq -r '.artifacts[].id' <<< "$response")
+          for artifact_id in "${artifact_ids[@]}"; do
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}"
+          done
+
+      - name: Publish production URL
+        run: |
+          echo "### Production" >> "$GITHUB_STEP_SUMMARY"
+          echo "https://bastianibanez.com" >> "$GITHUB_STEP_SUMMARY"
+
+  cleanup-abandoned:
+    name: Cleanup abandoned PR
+    if: github.event.pull_request.merged == false
+    concurrency:
+      group: preview-pr-${{ github.event.pull_request.number }}
+      cancel-in-progress: true
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    env:
+      CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+      CLOUDFLARE_ACCOUNT_ID: ${{ vars.CLOUDFLARE_ACCOUNT_ID }}
+      GH_TOKEN: ${{ github.token }}
+      NO_COLOR: "1"
+    steps:
+      - name: Check out cleanup config
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+
+      - name: Delete preview Worker
+        if: github.event.pull_request.head.repo.full_name == github.repository
+        shell: bash
+        run: |
+          set -euo pipefail
+          output_file="$(mktemp)"
+          if npx --yes "wrangler@${WRANGLER_VERSION}" delete "$PREVIEW_WORKER" \
+            --config wrangler.preview.jsonc \
+            --force 2>&1 | tee "$output_file"; then
+            exit 0
+          fi
+
+          if grep -qiE 'not found|does not exist|no worker' "$output_file"; then
+            echo "Preview Worker was already absent."
+            exit 0
+          fi
+
+          exit 1
+
+      - name: Delete retained build artifacts
+        if: always()
+        shell: bash
+        run: |
+          set -euo pipefail
+          response="$(gh api \
+            --method GET \
+            "repos/${GITHUB_REPOSITORY}/actions/artifacts" \
+            -f name="$ARTIFACT_NAME" \
+            -F per_page=100)"
+
+          mapfile -t artifact_ids < <(jq -r '.artifacts[].id' <<< "$response")
+          for artifact_id in "${artifact_ids[@]}"; do
+            gh api --method DELETE "repos/${GITHUB_REPOSITORY}/actions/artifacts/${artifact_id}"
+          done
