@@ -56,7 +56,7 @@ for (const file of textFiles) {
 if (builtFiles.some((file) => file.endsWith(".js"))) {
   throw new Error("Static build unexpectedly contains client JavaScript");
 }
-for (const path of ["cv.pdf", "en/cv.pdf"]) {
+for (const path of ["cv.pdf", "en/cv.pdf", "bastian-ibanez-cv.pdf"]) {
   const [approved, built] = await Promise.all([
     readFile(new URL(`../public/${path}`, import.meta.url)),
     readFile(new URL(path, distDir)),
@@ -82,13 +82,16 @@ const stylesheet = builtFiles.find((file) => file.startsWith("_astro/") && file.
 if (!stylesheet) throw new Error("Build: generated stylesheet not found");
 const [assetResponse, pdfResponse] = await Promise.all([
   fetch(`${origin}/${stylesheet}`),
-  fetch(`${origin}/cv.pdf`),
+  fetch(`${origin}/bastian-ibanez-cv.pdf`),
 ]);
 if (assetResponse.headers.get("cache-control") !== "public, max-age=31536000, immutable") {
   throw new Error("Headers: immutable asset cache policy is missing");
 }
 if (pdfResponse.headers.get("cache-control") !== "public, max-age=3600") {
   throw new Error("Headers: PDF cache policy is missing");
+}
+if (!pdfResponse.headers.get("content-disposition")?.includes("Bastian-Ibanez-CV.pdf")) {
+  throw new Error("Headers: downloadable CV content disposition is missing");
 }
 
 let checkedPages = 0;
@@ -193,7 +196,11 @@ try {
         `${route.path}: language switch expected ${route.alternate}, got desktop=${metadata.desktopLanguage}, mobile=${metadata.mobileLanguage}`,
       );
     }
-    const allowedOrigins = new Set(["https://github.com", "https://www.linkedin.com"]);
+    const allowedOrigins = new Set([
+      publicOrigin,
+      "https://github.com",
+      "https://www.linkedin.com",
+    ]);
     const disallowedOrigins = metadata.externalOrigins.filter((url) => !allowedOrigins.has(url));
     if (disallowedOrigins.length > 0) {
       throw new Error(`${route.path}: unexpected external origins: ${disallowedOrigins.join(", ")}`);

@@ -452,7 +452,7 @@ export const content: Record<Locale, SiteContent> = {
       "Casos de ingeniería con evidencia: agentes para operaciones ERP, software de manufactura, optimización matemática y tooling en Go.",
     languageLabel: "Español",
     alternateLanguageLabel: "English",
-    routes: { home: "/", cv: "/cv", pdf: "/cv.pdf" },
+    routes: { home: "/", cv: "/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv.pdf" },
     nav: {
       projects: "Proyectos",
       evidence: "Evidencia",
@@ -636,7 +636,7 @@ export const content: Record<Locale, SiteContent> = {
       "Evidence-led engineering cases spanning ERP operations agents, manufacturing software, mathematical optimization, and Go tooling.",
     languageLabel: "English",
     alternateLanguageLabel: "Español",
-    routes: { home: "/en/", cv: "/en/cv", pdf: "/en/cv.pdf" },
+    routes: { home: "/en/", cv: "/en/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv.pdf" },
     nav: {
       projects: "Projects",
       evidence: "Evidence",
