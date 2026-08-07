@@ -1,6 +1,7 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 import SectionHeading from "./SectionHeading.astro";
+import TechnologyStrip from "./TechnologyStrip.astro";
 import { content, identity, projectPath, type Locale } from "../data/content";
 
 interface Props {
@@ -47,6 +48,7 @@ const ids = locale === "es"
       <a class="action-link" href={page.routes.cv}>{page.hero.cvLabel} →</a>
       <a class="action-link" href={page.routes.pdf} download>{page.hero.pdfLabel} ↓</a>
     </div>
+    <TechnologyStrip locale={locale} />
   </section>
 
   <section class="section" id={ids.projects} aria-labelledby="projects-heading">
