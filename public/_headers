@@ -11,3 +11,6 @@
 
 /*.pdf
   Cache-Control: public, max-age=3600
+
+/bastian-ibanez-cv.pdf
+  Content-Disposition: attachment; filename="Bastian-Ibanez-CV.pdf"
