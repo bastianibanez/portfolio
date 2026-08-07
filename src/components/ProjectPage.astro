@@ -43,7 +43,9 @@ const projectsId = locale === "es" ? "proyectos" : "projects";
     </header>
 
     <figure class="project-figure">
-      <img src={project.asset} alt="" width="1200" height="560" />
+      <div class="project-figure__viewport" tabindex="0">
+        <img src={project.asset} alt="" width="1200" height="420" />
+      </div>
       <figcaption>{project.caption}</figcaption>
     </figure>
 
