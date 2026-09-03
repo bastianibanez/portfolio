@@ -56,7 +56,7 @@ for (const file of textFiles) {
 if (builtFiles.some((file) => file.endsWith(".js"))) {
   throw new Error("Static build unexpectedly contains client JavaScript");
 }
-for (const path of ["cv.pdf", "en/cv.pdf", "bastian-ibanez-cv.pdf"]) {
+for (const path of ["bastian-ibanez-cv-es.pdf", "bastian-ibanez-cv-en.pdf", "bastian-ibanez-cv.pdf"]) {
   const [approved, built] = await Promise.all([
     readFile(new URL(`../public/${path}`, import.meta.url)),
     readFile(new URL(path, distDir)),

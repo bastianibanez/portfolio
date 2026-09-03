@@ -18,7 +18,7 @@ const ids = locale === "es"
 
 <aside class="rail" aria-label={locale === "es" ? "Navegación principal" : "Primary navigation"}>
   <a class="rail__name" href={page.routes.home}>{identity.name}</a>
-  <p class="rail__role">{identity.role}</p>
+  <p class="rail__role">{page.role}</p>
   <p class="rail__location">{identity.location}</p>
   <a class="rail__email" href={identity.emailHref}>{identity.email}</a>
 
@@ -36,7 +36,7 @@ const ids = locale === "es"
       </li>
       <li><a href={anchor(ids.contact)}>{page.nav.contact}</a></li>
     </ul>
-    <a class="rail__download" href={page.routes.pdf} download="Bastian-Ibanez-CV.pdf">{page.hero.pdfLabel}</a>
+    <a class="rail__download" href={page.routes.pdf} download={`Bastian-Ibanez-CV-${locale.toUpperCase()}.pdf`}>{page.hero.pdfLabel}</a>
   </nav>
 
   <div class="rail__footer">

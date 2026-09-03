@@ -42,6 +42,8 @@ interface CvContent {
   profile: string;
   experienceHeading: string;
   experience: Experience[];
+  packagesHeading: string;
+  packages: { name: string; registry: string; description: string; href: string }[];
   projectsHeading: string;
   projects: { title: string; description: string }[];
   educationHeading: string;
@@ -58,6 +60,7 @@ interface CvContent {
 interface SiteContent {
   locale: Locale;
   alternateLocale: Locale;
+  role: string;
   title: string;
   description: string;
   ogDescription: string;
@@ -133,7 +136,6 @@ interface SiteContent {
 const shared = {
   name: "Bastián Ibáñez",
   cvName: "Bastián Ibáñez Martínez",
-  role: "Software Engineer · Full-Stack & Applied AI",
   location: "Santiago, Chile",
   email: "ibanezmbastian@gmail.com",
   emailHref: "mailto:ibanezmbastian@gmail.com",
@@ -445,14 +447,15 @@ export const content: Record<Locale, SiteContent> = {
   es: {
     locale: "es",
     alternateLocale: "en",
-    title: "Bastián Ibáñez — Software Engineer · Full-Stack & Applied AI",
+    role: "Software Engineer · Sistemas distribuidos confiables & IA aplicada",
+    title: "Bastián Ibáñez — Software Engineer · Sistemas distribuidos confiables & IA aplicada",
     description:
       "Portafolio de Bastián Ibáñez: sistemas full-stack, automatización operacional e IA aplicada llevados desde la arquitectura hasta producción.",
     ogDescription:
       "Casos de ingeniería con evidencia: agentes para operaciones ERP, software de manufactura, optimización matemática y tooling en Go.",
     languageLabel: "Español",
     alternateLanguageLabel: "English",
-    routes: { home: "/", cv: "/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv.pdf" },
+    routes: { home: "/", cv: "/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv-es.pdf" },
     nav: {
       projects: "Proyectos",
       evidence: "Evidencia",
@@ -461,11 +464,11 @@ export const content: Record<Locale, SiteContent> = {
       contact: "Contacto",
     },
     hero: {
-      heading: shared.role,
+      heading: "Software Engineer · Sistemas distribuidos confiables & IA aplicada",
       proposition:
         "Diseño y llevo a producción sistemas full-stack, automatización operacional e IA aplicada. Trabajo desde la arquitectura y el dominio hasta los flujos de entrega, observabilidad y recuperación.",
       context:
-        "Con base en Santiago, construyo principalmente con Python, Go y TypeScript. Mi trabajo reciente conecta agentes, sistemas ERP, productos operacionales y modelos de optimización con controles explícitos para operar de forma segura.",
+        "Con base en Santiago, construyo principalmente con Python y TypeScript. Mi trabajo reciente conecta agentes, sistemas ERP, productos operacionales y modelos de optimización con controles explícitos para operar de forma segura.",
       emailLabel: "Escribirme",
       projectsLabel: "Ver proyectos",
       cvLabel: "Ver CV en la web",
@@ -532,7 +535,7 @@ export const content: Record<Locale, SiteContent> = {
       capabilities: [
         "Arquitectura y entrega de productos full-stack.",
         "Agentes, workflows durables e integración con sistemas operacionales.",
-        "APIs y servicios en Python y Go.",
+        "APIs y servicios en Python.",
         "Interfaces en TypeScript y React.",
         "Modelado de dominio, pruebas automatizadas y despliegue en nube.",
       ],
@@ -563,7 +566,7 @@ export const content: Record<Locale, SiteContent> = {
       heading: shared.cvName,
       profileHeading: "Perfil",
       profile:
-        "Ingeniero de software enfocado en productos full-stack, automatización operacional e IA aplicada. Diseño sistemas que conectan modelos, datos y operaciones reales con límites explícitos, trazabilidad y caminos de recuperación.",
+        "Ingeniero de software que diseña plataformas de agentes de IA y la maquinaria de confiabilidad que las sostiene en producción: entrega exactly-once, idempotencia, control de concurrencia y trazabilidad. Construyo con límites explícitos entre dominio, integración e infraestructura, y con caminos de recuperación pensados desde el diseño.",
       experienceHeading: "Experiencia",
       experience: [
         {
@@ -571,9 +574,11 @@ export const content: Record<Locale, SiteContent> = {
           company: "NotoriosTI",
           dates: "Agosto de 2025 — actualidad",
           bullets: [
-            "Lidero un equipo de tres ingenieros que desarrolla automatización con IA para operaciones de comercio electrónico.",
-            "Definí la arquitectura y operación en nube de un agente multi-especialista para producción, compras y análisis sobre datos de ERP.",
-            "Diseñé integraciones y servicios para eventos de marketplaces, monitoreo operacional y configuración segura entre entornos.",
+            "Primer ingeniero contratado de la empresa. Construí la plataforma técnica desde cero y fui promovido a Lead a medida que el equipo creció a tres.",
+            "Diseñé la maquinaria de confiabilidad de una plataforma multi-agente sobre ERP: outbox transaccional con fencing tokens para entrega exactly-once, saga con recuperación por fingerprint sobre operaciones de Odoo y locks de conversación de dos capas.",
+            "Backpressure acoplado a la cuota del modelo, con ~1:1 test-a-código, 40 ADRs y 15 migraciones idempotentes.",
+            "CI/CD y seguridad de despliegue: Workload Identity Federation sin llaves de larga vida, build-once con despliegue por digest y atestación firmada, y cutover de tráfico compare-and-swap en Cloud Run con recuperación automática.",
+            "Middleware MercadoLibre–Odoo: validación de firmas HMAC de webhooks, mapeo de productos por SKU desde PostgreSQL y rotación de tokens OAuth con Secret Manager como fuente única.",
           ],
         },
         {
@@ -581,9 +586,26 @@ export const content: Record<Locale, SiteContent> = {
           company: "NotoriosTI",
           dates: "Mayo de 2025 — agosto de 2025",
           bullets: [
-            "Construí las bases del agente operacional y la integración con mensajería y ERP.",
-            "Configuré infraestructura en GCP para servicios, datos, secretos y despliegues en contenedores.",
+            "Levanté desde cero la infraestructura técnica de la empresa: configuración completa de GCP (Cloud Run, Cloud SQL, Secret Manager, BigQuery), pipelines Docker y estrategia de despliegue.",
+            "Construí las bases del asistente multi-agente LangGraph y odoo-engine, librería Python publicada que encapsula la integración con Odoo (JSON-RPC, modelos, CRUD).",
           ],
+        },
+      ],
+      packagesHeading: "Paquetes publicados",
+      packages: [
+        {
+          name: "env-manager",
+          registry: "PyPI",
+          description:
+            "Cargador de configuración con soporte para GCP Secret Manager, coerción de tipos y validación agregada de errores. Dependencia de runtime de 20+ repositorios.",
+          href: "https://github.com/NotoriosTI/env-manager",
+        },
+        {
+          name: "@notoriosti/env-manager",
+          registry: "npm",
+          description:
+            "Port TypeScript con dotenv cifrado ECIES/secp256k1 y CLI; build dual ESM+CJS, tipado estricto.",
+          href: "https://github.com/NotoriosTI/env-manager-js",
         },
       ],
       projectsHeading: "Proyectos",
@@ -591,26 +613,31 @@ export const content: Record<Locale, SiteContent> = {
         {
           title: "Plataforma operacional para manufactura",
           description:
-            "Producto full-stack entregado y desplegado; inventario trazable, fabricación transaccional y flujos E2E.",
+            "Producto full-stack: inventario trazable, fabricación transaccional, compras, calidad y mermas. Next.js 16 + React 19 + Convex (mutations ACID serializables) sobre Cloudflare Workers; 120 archivos de test, 1.749 aserciones.",
         },
         {
           title: "GroupFit",
           description:
-            "Solver híbrido para asignación de grupos bajo restricciones, con salida Excel/JSON y explicaciones para casos no asignados.",
+            "Planificador que asigna grupos a hoteles y fechas bajo restricciones de capacidad, disponibilidad y transporte, con resultado parcial explicable. Heurística con reparación + refinamiento ILP opcional (PuLP/HiGHS).",
         },
         {
           title: "go-agent",
           description:
-            "Agente de terminal en Go con arquitectura hexagonal, cuatro proveedores, herramientas controladas y persistencia.",
+            "Agente de programación para terminal en Go, arquitectura hexagonal: núcleo ReAct aislado de TUI, cuatro adaptadores de modelos, streaming, cancelación y confirmación para acciones sensibles.",
+        },
+        {
+          title: "issue-agent",
+          description:
+            "Agente de triage LangGraph: reportes de error en Slack → issues de GitHub enrutados con fix sugerido. Cloud Tasks como buffer de debounce sin base de datos, sobre Cloud Run escala-a-cero con WIF.",
         },
       ],
       educationHeading: "Educación",
       degree: "Ingeniería Civil en Informática",
       school: "Universidad Andrés Bello",
-      educationDates: "2022 — 2027 (esperado)",
+      educationDates: "2022 — 2028 (esperado)",
       technologiesHeading: "Tecnologías",
       technologies:
-        "Python, Go, TypeScript, FastAPI, LangGraph, React, Next.js, PostgreSQL, BigQuery, Docker, GCP y Cloudflare.",
+        "Python, TypeScript, SQL/PL-pgSQL, FastAPI, LangGraph, LangChain, React, Next.js, Convex, PostgreSQL, BigQuery, pgvector, Docker, GCP (Cloud Run, Cloud SQL, Secret Manager, Cloud Tasks, WIF) y Cloudflare Workers.",
       languagesHeading: "Idiomas",
       languages: [
         { language: "Español", level: "nativo" },
@@ -629,14 +656,15 @@ export const content: Record<Locale, SiteContent> = {
   en: {
     locale: "en",
     alternateLocale: "es",
-    title: "Bastián Ibáñez — Software Engineer · Full-Stack & Applied AI",
+    role: "Software Engineer · Reliable distributed systems & applied AI",
+    title: "Bastián Ibáñez — Software Engineer · Reliable distributed systems & applied AI",
     description:
       "Bastián Ibáñez's portfolio: full-stack systems, operational automation, and applied AI taken from architecture through production.",
     ogDescription:
       "Evidence-led engineering cases spanning ERP operations agents, manufacturing software, mathematical optimization, and Go tooling.",
     languageLabel: "English",
     alternateLanguageLabel: "Español",
-    routes: { home: "/en/", cv: "/en/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv.pdf" },
+    routes: { home: "/en/", cv: "/en/cv", pdf: "https://bastianibanez.com/bastian-ibanez-cv-en.pdf" },
     nav: {
       projects: "Projects",
       evidence: "Evidence",
@@ -645,11 +673,11 @@ export const content: Record<Locale, SiteContent> = {
       contact: "Contact",
     },
     hero: {
-      heading: shared.role,
+      heading: "Software Engineer · Reliable distributed systems & applied AI",
       proposition:
         "I design and ship full-stack systems, operational automation, and applied AI. I work from architecture and domain boundaries through delivery, observability, and recovery flows.",
       context:
-        "Based in Santiago, I build primarily with Python, Go, and TypeScript. My recent work connects agents, ERP systems, operations products, and optimization models with explicit controls for safe operation.",
+        "Based in Santiago, I build primarily with Python and TypeScript. My recent work connects agents, ERP systems, operations products, and optimization models with explicit controls for safe operation.",
       emailLabel: "Email me",
       projectsLabel: "View projects",
       cvLabel: "View web CV",
@@ -716,7 +744,7 @@ export const content: Record<Locale, SiteContent> = {
       capabilities: [
         "Full-stack product architecture and delivery.",
         "Agents, durable workflows, and operational-system integration.",
-        "APIs and services in Python and Go.",
+        "APIs and services in Python.",
         "Interfaces in TypeScript and React.",
         "Domain modeling, automated testing, and cloud delivery.",
       ],
@@ -747,7 +775,7 @@ export const content: Record<Locale, SiteContent> = {
       heading: shared.cvName,
       profileHeading: "Profile",
       profile:
-        "Software engineer focused on full-stack products, operational automation, and applied AI. I design systems that connect models, data, and real operations with explicit boundaries, traceability, and recovery paths.",
+        "Software engineer who designs AI agent platforms and the reliability machinery that keeps them running in production: exactly-once delivery, idempotency, concurrency control, and traceability. I build with explicit boundaries between domain, integration, and infrastructure, and with recovery paths designed in from the start.",
       experienceHeading: "Experience",
       experience: [
         {
@@ -755,9 +783,11 @@ export const content: Record<Locale, SiteContent> = {
           company: "NotoriosTI",
           dates: "August 2025 — present",
           bullets: [
-            "Lead a three-engineer team building AI-powered automation for e-commerce operations.",
-            "Defined the architecture and cloud operation of a multi-specialist agent for production, purchasing, and analysis over ERP data.",
-            "Designed integrations and services for marketplace events, operational monitoring, and secure configuration across environments.",
+            "First engineering hire. Built the technical platform from scratch and was promoted to Lead as the team grew to three.",
+            "Designed the reliability machinery of a multi-agent platform over ERP: transactional outbox with fencing tokens for exactly-once delivery, saga with fingerprint-based recovery over Odoo operations, and two-layer conversation locks.",
+            "Backpressure coupled to model quota, with a ~1:1 test-to-code ratio, 40 ADRs, and 15 idempotent migrations.",
+            "CI/CD and deployment security: Workload Identity Federation with no long-lived keys, build-once with digest-pinned deploys and signed attestation, and compare-and-swap traffic cutover on Cloud Run with automatic rollback.",
+            "MercadoLibre–Odoo middleware: HMAC webhook signature validation, SKU-based product mapping from PostgreSQL, and OAuth token rotation with Secret Manager as the single source of truth.",
           ],
         },
         {
@@ -765,9 +795,26 @@ export const content: Record<Locale, SiteContent> = {
           company: "NotoriosTI",
           dates: "May 2025 — August 2025",
           bullets: [
-            "Built the foundations of the operations agent and its messaging and ERP integration.",
-            "Configured GCP infrastructure for services, data, secrets, and container delivery.",
+            "Stood up the company's technical infrastructure from zero: full GCP setup (Cloud Run, Cloud SQL, Secret Manager, BigQuery), Docker pipelines, and deployment strategy.",
+            "Built the foundations of the LangGraph multi-agent assistant and odoo-engine, a published Python library encapsulating Odoo integration (JSON-RPC, models, CRUD).",
           ],
+        },
+      ],
+      packagesHeading: "Published packages",
+      packages: [
+        {
+          name: "env-manager",
+          registry: "PyPI",
+          description:
+            "Configuration loader with GCP Secret Manager support, type coercion, and aggregated error validation. Runtime dependency of 20+ repositories.",
+          href: "https://github.com/NotoriosTI/env-manager",
+        },
+        {
+          name: "@notoriosti/env-manager",
+          registry: "npm",
+          description:
+            "TypeScript port with ECIES/secp256k1 encrypted dotenv and CLI; dual ESM+CJS build, strict typing.",
+          href: "https://github.com/NotoriosTI/env-manager-js",
         },
       ],
       projectsHeading: "Projects",
@@ -775,26 +822,31 @@ export const content: Record<Locale, SiteContent> = {
         {
           title: "Manufacturing operations platform",
           description:
-            "Delivered and deployed full-stack product with traceable inventory, transactional manufacturing, and E2E flows.",
+            "Full-stack product: traceable inventory, transactional manufacturing, purchasing, quality, and scrap. Next.js 16 + React 19 + Convex (serializable ACID mutations) on Cloudflare Workers; 120 test files, 1,749 assertions.",
         },
         {
           title: "GroupFit",
           description:
-            "Hybrid constrained-assignment solver with Excel/JSON output and explanations for unplaced cases.",
+            "Planner that assigns groups to hotels and dates under capacity, availability, and transport constraints, with an explainable partial result. Heuristic with repair plus optional ILP refinement (PuLP/HiGHS).",
         },
         {
           title: "go-agent",
           description:
-            "Terminal agent in Go with hexagonal architecture, four providers, controlled tools, and persistence.",
+            "Terminal coding agent in Go, hexagonal architecture: ReAct core isolated from TUI, four model adapters, streaming, cancellation, and confirmation gates for sensitive actions.",
+        },
+        {
+          title: "issue-agent",
+          description:
+            "LangGraph triage agent: bug reports in Slack → routed GitHub issues with a suggested fix. Cloud Tasks as a database-free debounce buffer, on scale-to-zero Cloud Run with WIF.",
         },
       ],
       educationHeading: "Education",
       degree: "Computer Science and Engineering",
       school: "Universidad Andrés Bello",
-      educationDates: "2022 — 2027 (expected)",
+      educationDates: "2022 — 2028 (expected)",
       technologiesHeading: "Technologies",
       technologies:
-        "Python, Go, TypeScript, FastAPI, LangGraph, React, Next.js, PostgreSQL, BigQuery, Docker, GCP, and Cloudflare.",
+        "Python, TypeScript, SQL/PL-pgSQL, FastAPI, LangGraph, LangChain, React, Next.js, Convex, PostgreSQL, BigQuery, pgvector, Docker, GCP (Cloud Run, Cloud SQL, Secret Manager, Cloud Tasks, WIF), and Cloudflare Workers.",
       languagesHeading: "Languages",
       languages: [
         { language: "Spanish", level: "native" },

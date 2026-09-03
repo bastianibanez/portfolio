@@ -45,7 +45,7 @@ const ids = locale === "es"
       <a class="action-link action-link--primary" href={identity.emailHref}>{page.hero.emailLabel} ↗</a>
       <a class="action-link" href={`#${ids.projects}`}>{page.hero.projectsLabel} ↓</a>
       <a class="action-link" href={page.routes.cv}>{page.hero.cvLabel} →</a>
-      <a class="action-link" href={page.routes.pdf} download="Bastian-Ibanez-CV.pdf">{page.hero.pdfLabel} ↓</a>
+      <a class="action-link" href={page.routes.pdf} download={`Bastian-Ibanez-CV-${locale.toUpperCase()}.pdf`}>{page.hero.pdfLabel} ↓</a>
     </div>
   </section>
 
@@ -138,7 +138,7 @@ const ids = locale === "es"
           {page.contact.emailLabel} ↗
         </a>
         <a class="action-link" href={page.routes.cv}>{page.contact.cvLabel} →</a>
-        <a class="action-link" href={page.routes.pdf} download="Bastian-Ibanez-CV.pdf">{page.contact.pdfLabel} ↓</a>
+        <a class="action-link" href={page.routes.pdf} download={`Bastian-Ibanez-CV-${locale.toUpperCase()}.pdf`}>{page.contact.pdfLabel} ↓</a>
       </div>
     </div>
   </section>
