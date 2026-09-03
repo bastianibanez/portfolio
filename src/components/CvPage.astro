@@ -27,10 +27,10 @@ const description = locale === "es"
       <div>
         <p class="eyebrow">CV / {identity.location}</p>
         <h1>{cv.heading}</h1>
-        <p>{identity.role}</p>
+        <p>{page.role}</p>
         <a href={identity.emailHref}>{identity.email}</a>
       </div>
-      <a class="action-link action-link--primary" href={page.routes.pdf} download="Bastian-Ibanez-CV.pdf">{cv.downloadLabel} ↓</a>
+      <a class="action-link action-link--primary" href={page.routes.pdf} download={`Bastian-Ibanez-CV-${locale.toUpperCase()}.pdf`}>{cv.downloadLabel} ↓</a>
     </header>
 
     <div class="cv-grid">
@@ -53,6 +53,30 @@ const description = locale === "es"
               </ul>
             </article>
           ))}
+        </section>
+
+        <section class="cv-section">
+          <h2>{cv.packagesHeading}</h2>
+          <ul class="cv-projects">
+            {cv.packages.map((pkg) => (
+              <li>
+                <a href={pkg.href}><strong>{pkg.name}</strong></a> <span class="date">{pkg.registry}</span><br />
+                {pkg.description}
+              </li>
+            ))}
+          </ul>
+        </section>
+
+        <section class="cv-section">
+          <h2>{cv.packagesHeading}</h2>
+          <ul class="cv-projects">
+            {cv.packages.map((pkg) => (
+              <li>
+                <a href={pkg.href}><strong>{pkg.name}</strong></a> <span class="date">{pkg.registry}</span><br />
+                {pkg.description}
+              </li>
+            ))}
+          </ul>
         </section>
 
         <section class="cv-section">
